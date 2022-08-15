@@ -71,6 +71,10 @@
   background-image: url('../public/imgs/trans2.svg')
 }
 
+.spacerThree {
+  background-image: url('../public/imgs/trans3.svg')
+}
+
 .textBlock {
   padding-top: 5vh;
   padding-left: 5vw;
@@ -88,6 +92,11 @@
   color: rgb(247, 247, 247);
 }
 
+.textThree {
+  background-color: #2C055C;
+  color: rgb(247, 247, 247);
+}
+
 .contentBlockOne {
   background: linear-gradient(45deg, rgb(77, 47, 69) 0%, rgb(54, 47, 77) 50%, rgb(47, 77, 75) 100%);
 }
@@ -97,23 +106,24 @@
   padding-bottom: 3vh;
 }
 
-.skillList {
+.tableList {
   width: 100%;
   margin-top: 2vh;
 }
 
-.skillCaption {
+.tableCaption {
   text-align: left;
   font-size: 2em;
+  padding-bottom: 2vh;
 }
 
-.skillItem {
+.tableRow {
   width:100%;
   height: 5vh;
   text-align: justify;
 }
 
-.skill {
+.tableItem {
   margin-top: auto;
   margin-bottom: auto;
   margin-left: 2rem;

@@ -1,7 +1,13 @@
 import styles from "../styles/Home.module.css";
 import Layout from "../components/Layout";
+import CountUpAnimation from "../components/CountUp";
+import useOnScreen from "../components/useOnScreen";
+import { useRef } from "react";
+import Link from "next/link";
 
 export default function Home() {
+  const ref = useRef();
+  const isVisible = useOnScreen(ref);
   return (
     <Layout title="About Michal Rajzer">
       <div className={styles.contentBlockOne}>
@@ -34,33 +40,61 @@ export default function Home() {
         <div className={`${styles.spacer} ${styles.spacerTwo}`}></div>
         <div>
           <div className={`${styles.textBlock} ${styles.textTwo}`}>
-            <table className={styles.skillList}>
-              <caption className={styles.skillCaption}>My skills:</caption>
+            <table className={styles.tableList}>
+              <caption className={styles.tableCaption}>My skills:</caption>
               <tbody>
-                <tr className={styles.skillItem}>
-                  <td className={styles.skill}>Python 3</td>
-                  <td className={styles.skill}>Experienced</td>
-                  <td className={styles.skill}>[▉▉▉▉▉▉]</td>
+                <tr className={styles.tableRow}>
+                  <td className={styles.tableItem}>Python 3</td>
+                  <td className={styles.tableItem}>Experienced</td>
+                  <td className={styles.tableItem}>[▉▉▉▉▉▉]</td>
                 </tr>
-                <tr className={styles.skillItem}>
-                  <td className={styles.skill}>React/NextJS</td>
-                  <td className={styles.skill}>Experienced</td>
-                  <td className={styles.skill}>[▉▉▉▉▉]</td>
+                <tr className={styles.tableRow}>
+                  <td className={styles.tableItem}>React/NextJS</td>
+                  <td className={styles.tableItem}>Experienced</td>
+                  <td className={styles.tableItem}>[▉▉▉▉▉]</td>
                 </tr>
-                <tr className={styles.skillItem}>
-                  <td className={styles.skill}>TensorFlow 2</td>
-                  <td className={styles.skill}>Intermediate</td>
-                  <td className={styles.skill}>[▉▉▉▉]</td>
+                <tr className={styles.tableRow}>
+                  <td className={styles.tableItem}>TensorFlow 2</td>
+                  <td className={styles.tableItem}>Intermediate</td>
+                  <td className={styles.tableItem}>[▉▉▉▉]</td>
                 </tr>
-                <tr className={styles.skillItem}>
-                  <td className={styles.skill}>C++</td>
-                  <td className={styles.skill}>Basic</td>
-                  <td className={styles.skill}>[▉▉▉]</td>
+                <tr className={styles.tableRow}>
+                  <td className={styles.tableItem}>C++</td>
+                  <td className={styles.tableItem}>Basic</td>
+                  <td className={styles.tableItem}>[▉▉▉]</td>
                 </tr>
-                <tr className={styles.skillItem}>
-                  <td className={styles.skill}>Arduino</td>
-                  <td className={styles.skill}>Basic</td>
-                  <td className={styles.skill}>[▉▉▉]</td>
+                <tr className={styles.tableRow}>
+                  <td className={styles.tableItem}>Arduino</td>
+                  <td className={styles.tableItem}>Basic</td>
+                  <td className={styles.tableItem}>[▉▉▉]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className={`${styles.spacer} ${styles.spacerThree}`}></div>
+        </div>
+        <div>
+          <div className={`${styles.textBlock} ${styles.textThree}`}>
+            <table className={styles.tableList}>
+              <caption className={styles.tableCaption}>
+                <Link href="/projects">My Projects</Link>
+              </caption>
+              <tbody ref={ref}>
+                <tr className={styles.tableRow} style={{ textAlign: "center" }}>
+                  <th className={styles.tableItem}>Python</th>
+                  <th className={styles.tableItem}>Javascript</th>
+                  <th className={styles.tableItem}>Arduino</th>
+                </tr>
+                <tr className={styles.tableRow} style={{ textAlign: "center" }}>
+                  <td className={styles.tableItem}>
+                    {isVisible ? <CountUpAnimation>5</CountUpAnimation> : ""}
+                  </td>
+                  <td className={styles.tableItem}>
+                    {isVisible ? <CountUpAnimation>4</CountUpAnimation> : ""}
+                  </td>
+                  <td className={styles.tableItem}>
+                    {isVisible ? <CountUpAnimation>12</CountUpAnimation> : ""}
+                  </td>
                 </tr>
               </tbody>
             </table>
