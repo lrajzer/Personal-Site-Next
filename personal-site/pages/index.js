@@ -15,7 +15,7 @@ export default function Home() {
           <div style={{ padding: 0, margin: 0 }}>
             <h1>Hey!</h1>
             <h1>My name is Michał</h1>
-            <h1>I'm a fullstack developer!</h1>
+            <h1>I&apos;m a fullstack developer!</h1>
           </div>
         </div>
         <svg className={styles.arrows}>
@@ -29,7 +29,7 @@ export default function Home() {
         <div className={`${styles.textBlock} ${styles.textOne}`}>
           <h2 className={styles.headTwo}>Something more about me.</h2>
           <p>
-            Right now I'm attending Computer Science undergraduate studies at
+            Right now I&apos;m attending Computer Science undergraduate studies at
             --REDATCTED--. In highschool I took part in the IB Programme where I
             took higher level computer science, physics and maths courses. I
             started my adventure with programming at 12 when my father
