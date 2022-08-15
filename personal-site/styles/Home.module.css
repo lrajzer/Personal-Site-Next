@@ -1,129 +1,194 @@
-.container {
-  padding: 0 2rem;
+.content {
+  color: rgb(247, 247, 247);
 }
 
-.main {
-  min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
+.nameHeader {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
+  margin: auto;
 }
 
-.footer {
-  display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
-  justify-content: center;
-  align-items: center;
+.arrows {
+	width: 60px;
+	height: 72px;
+	position: absolute;
+	left: 50%;
+	margin-left: -30px;
+	bottom: 5vh;
+}
+@keyframes arrow
+{
+0% {opacity:0}
+40% {opacity:1}
+80% {opacity:0}
+100% {opacity:0}
 }
 
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
+@-webkit-keyframes arrow /*Safari and Chrome*/
+{
+0% {opacity:0}
+40% {opacity:1}
+80% {opacity:0}
+100% {opacity:0}
 }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
+.arrows path.a1 {
+	animation-delay:-2s;
+	-webkit-animation-delay:-2s;
 }
 
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
+.arrows path.a2 {
+	animation-delay:-1s;
+	-webkit-animation-delay:-1s;
 }
 
-.title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
+.arrows path.a3 {	
+	animation-delay:0s;
+	-webkit-animation-delay:0s;
+}
+.arrows path {
+	stroke: #75f37f;
+	fill: transparent;
+	stroke-width: 1px;	
+	animation: arrow 3s infinite;
+	-webkit-animation: arrow 3s infinite; 
 }
 
-.title,
-.description {
-  text-align: center;
+.spacer {
+  aspect-ratio: 1440/100;
+  width:100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
-.description {
-  margin: 4rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
+.spacerOne {
+  background-image: url('../public/imgs/trans1.svg')
 }
 
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+.spacerTwo {
+  background-image: url('../public/imgs/trans2.svg')
 }
 
-.grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 800px;
+.textBlock {
+  padding-top: 5vh;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  padding-bottom: 5vh;
 }
 
-.card {
-  margin: 1rem;
-  padding: 1.5rem;
+.textOne {
+  background-color: #68bfff;
+  color: #030303;
+}
+
+.textTwo {
+  background-color: #470500;
+  color: rgb(247, 247, 247);
+}
+
+.contentBlockOne {
+  background: linear-gradient(45deg, rgb(77, 47, 69) 0%, rgb(54, 47, 77) 50%, rgb(47, 77, 75) 100%);
+}
+
+.headTwo {
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+}
+
+.skillList {
+  width: 100%;
+  margin-top: 2vh;
+}
+
+.skillCaption {
   text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
+  font-size: 2em;
 }
 
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+.skillItem {
+  width:100%;
+  height: 5vh;
+  text-align: justify;
 }
 
-.card h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
+.skill {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 2rem;
 }
 
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
-}
+@media screen and (max-width: 1000px) {
+  .textBlock {
+    font-size: 3vw;
+  }
 
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
-}
+  .headTwo {
+    font-size: 2em;
+  }
 
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
+  .nameHeader {
+    height: 94vh;
+    padding-left: 5vw;
+    font-size: 4vw;
+  }
+
+  .content {
+    margin-bottom: 6vh;
+    min-height: 94vh;
+  }
+  .arrows {
+    bottom: 10vh;
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .card,
-  .footer {
-    border-color: #222;
+@media screen and (min-width: 1000px) and (max-width: 1500px) {
+  .textBlock {
+    font-size: 2vw;
   }
-  .code {
-    background: #111;
+
+  .headTwo {
+    font-size: 4.5vw;
   }
-  .logo img {
-    filter: invert(1);
+  
+  .nameHeader {
+    height: 95vh;
+    padding-left: 5vw;
+    font-size: 2.2vw;
   }
+  
+  .content {
+    padding-bottom: 0;
+    padding-top: 6vh;
+    min-height: 94vh;
+  }
+  .skillList {
+  width:70%;
+}
+}
+
+@media screen and (min-width: 1500px) {
+  .textBlock {
+    font-size: 2vw;
+  }
+
+  .headTwo {
+    font-size: 2em;
+  }
+
+  .nameHeader {
+    height: 96vh;
+    padding-left: 6vw;
+    font-size: 2.2vw;
+  }
+  
+  .content {
+    padding-top: 9vh;
+    padding-bottom: 0;
+    min-height: 91vh;
+  }
+  .skillList {
+  width:70%;
+}
 }
