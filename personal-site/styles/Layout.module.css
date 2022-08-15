@@ -1,0 +1,20 @@
+@media screen and (max-width: 768px) {
+  .content {
+    margin-bottom: 6vh;
+    min-height: 94vh;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1500px) {
+  .content {
+    padding-top: 6vh;
+    min-height: 94vh;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .content {
+    padding-top: 11vh;
+    min-height: 91vh;
+  }
+}
