@@ -61,15 +61,28 @@
 @media screen and (max-width: 768px) {
   .mainContent {
     min-height: 88vh;
+    padding-left: 2vw;
+    padding-top: 2vh;
+    padding-right: 2vw;
   }
 
-  .projectsTable{
+  .projectsTable {
     display: inline-block;
   }
   .project {
     display: inline-block;
     width: 100%;
     padding-top: 5vh;
+  }
+  .projectDescription {
+    text-align: justify;
+  }
+
+  .projectsHeading {
+    text-align: justify;
+  }
+  .projectsCaption {
+    text-align: justify;
   }
 }
 
