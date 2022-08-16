@@ -9,7 +9,8 @@ export default function Projects() {
         <h1 className={styles.projectsTitle}>My projects</h1>
         <table className={styles.projectsTable}>
           <caption className={styles.projectsCaption}>
-            It's best to check out each project by clicking on it&apos;s name.
+            It&apos;s best to check out each project by clicking on it&apos;s
+            name.
             <br />
             To explore more projects from each category, click on the language.
           </caption>
