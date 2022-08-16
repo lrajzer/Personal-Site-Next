@@ -1,0 +1,31 @@
+.footer {
+    width: 100%;
+    background: #1b1b1b;
+    height: 6vh;
+}
+
+.links {
+    padding: 0 10vw 0 10vw;
+    display: flex;
+    flex-direction: row;
+    height: 6vh;
+    }
+
+.link{
+    margin:auto;
+    font-size: 1.75em;
+    text-align:center;
+}
+
+@media screen and (max-width: 768px) {
+    .links {
+    padding: 0;
+    }
+    .link{
+    font-size: 1em;
+    
+    }
+    .noMobile {
+        display:none;
+    }
+}
