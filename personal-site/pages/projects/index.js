@@ -29,7 +29,7 @@ export default function Projects() {
             <tr>
               <td className={styles.project}></td>
               <td className={styles.project}>
-                <a href="https://mypronouns.tech" target="_blank">
+                <a href="https://mypronouns.tech" target="_blank" rel='noreferrer'>
                   <h2 className={styles.projectTitle}>MyPronouns.Tech</h2>
                   <p className={styles.projectDescription}>
                     This is a simple webpage and API desinged to help people use
