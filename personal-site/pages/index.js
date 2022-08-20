@@ -27,7 +27,7 @@ export default function Home() {
       </div>
       <div>
         <div className={`${styles.textBlock} ${styles.textOne}`}>
-          <h2 className={styles.headTwo}>Something more about me.</h2>
+          <h2 className={styles.headTwo}>A few words about me.</h2>
           <p>
             Right now I&apos;m attending Computer Science undergraduate studies at
             --REDATCTED--. In highschool I took part in the IB Programme where I
