@@ -4,8 +4,8 @@
  * @param {import("next/types").NextApiResponse} res
  */
 import { withApiAuthRequired, getSession } from "@auth0/nextjs-auth0";
-import connectDB from "../../../components/db/connectDB";
-import BlogPost from "../../../components/db/models/blogPost";
+import connectDB from "../../../components/db/connectDB.js";
+import BlogPost from "../../../components/db/models/blogPost.js";
 
 export default withApiAuthRequired(async function addPost(req, res) {
   const { uid, title, content } = req.query;
