@@ -9,9 +9,10 @@ const BlogPost = new Schema({
   },
   title: { type: String, required: true },
   content: { type: String, required: true },
-  commentIDs: { type: String },
-  dateCreated: {type: Date, required: true},
-  dateModified: {type: Date},
+  commentIDs: { type: Schema.types.Mixed },
+  dateCreated: { type: Date, required: true },
+  dateModified: { type: Date },
+  coverImage: { type: Schema.types.Mixed },
 });
 
 export default models.BlogPost || model('BlogPost', BlogPost);
