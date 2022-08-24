@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "../styles/Blogs.module.css";
 import TagRemover from "../utils/TagRemover";
+import Image from "next/Image";
 
 export default function BlogShort(props) {
   let maxLength = 303;
@@ -8,16 +9,27 @@ export default function BlogShort(props) {
   {
     maxLength = props.maxLength; 
   }
+  
   const thisBlog = props.blog;
-  let image;
-  if (thisBlog.coverImage !== undefined) {
-    image = <img src={thisBlog.coverImage.url} alt={thisBlog.coverImage.alt} className={styles.CoverImage} />;
-  }
-  const date = new Date(thisBlog.date);
+  const image = thisBlog.coverImage ? (
+    <Image
+      src={thisBlog.coverImage.url}
+      alt={thisBlog.coverImage.alt}
+      className={styles.CoverImage}
+    />
+  ) : (
+    ""
+  );
+  const date = thisBlog.dateModified
+    ? new Date(thisBlog.dateModified)
+    : new Date(thisBlog.dateCreated);
+  
   let shortDesc = TagRemover(thisBlog.content);
+  
   if (shortDesc.length > maxLength) {
     shortDesc = shortDesc.slice(0, maxLength-3) + "...";
   }
+
   return (
     <li className={styles.BlogLi}>
       {image}
@@ -34,9 +46,9 @@ export default function BlogShort(props) {
             <p className={styles.Author}>
               <Link href="/">{thisBlog.author}</Link>
             </p>
-            <time dateTime={date.toISOString()} className={styles.Date}>
+            {<time dateTime={date.toISOString()} className={styles.Date}>
               {date.toLocaleDateString("en-GB")}
-            </time>
+            </time>}
           </div>
         </div>
         <p className={styles.Description}>
