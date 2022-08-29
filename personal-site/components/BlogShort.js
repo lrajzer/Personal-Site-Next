@@ -11,18 +11,20 @@ export default function BlogShort(props) {
   }
 
   const thisBlog = props.blog;
-  const image = thisBlog.coverImage ? (
-    <img
-      src={thisBlog.coverImage.url}
-      alt={thisBlog.coverImage.alt}
-      className={styles.CoverImage}
-    />
-  ) : (
-    ""
-  );
-  const date = thisBlog.dateModified
-    ? new Date(thisBlog.dateModified)
-    : new Date(thisBlog.dateCreated);
+  const image =
+    thisBlog.coverImage !== null ? (
+      <img
+        src={thisBlog.coverImage.url}
+        alt={thisBlog.coverImage.alt}
+        className={styles.CoverImage}
+      />
+    ) : (
+      ""
+    );
+  const date =
+    thisBlog.dateModified !== null
+      ? new Date(thisBlog.dateModified)
+      : new Date(thisBlog.dateCreated);
 
   let shortDesc = TagRemover(thisBlog.content);
 
