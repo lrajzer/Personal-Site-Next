@@ -1,0 +1,50 @@
+.BlogFull {
+  background: linear-gradient(
+    45deg,
+    rgb(77, 47, 69) 0%,
+    rgb(54, 47, 77) 50%,
+    rgb(47, 77, 75) 100%
+  );
+  padding: 2vh 2vw 2vh 2vw;
+}
+
+@media screen and (max-width: 768px) {
+  .BlogFull {
+    min-height: 84vh;
+  }
+  .BlogHeader {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1500px) {
+  .BlogFull {
+    min-height: 84vh;
+  }
+  .BlogHeader {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .BlogHeader :last-child {
+    margin-left: auto;
+    text-align: right;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .BlogFull {
+    min-height: 84vh;
+  }
+  .BlogHeader {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .BlogHeader :last-child {
+    margin-left: auto;
+    text-align: right;
+  }
+}

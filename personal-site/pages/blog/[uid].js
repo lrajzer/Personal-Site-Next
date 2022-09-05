@@ -16,10 +16,11 @@ export async function getServerSideProps(context) {
         title: blog.title,
         dateCreated: blog.dateCreated.toISOString(),
         content: blog.content,
-        dateModified: blog.dateModified ? dateModified : null,
-        coverImage: blog.coverImage
-          ? { url: blog.url, alt: blog.alt }
+        dateModified: blog.dateModified
+          ? blog.dateModified.toISOString()
           : null,
+        coverImageURL: blog.coverImageURL ? blog.coverImageURL : null, //"https://i.imgur.com/m0SctLi.jpeg"
+        coverImageAlt: blog.coverImageAlt ? blog.coverImageAlt : null, //"Swimmy cat"
       },
     },
   };
