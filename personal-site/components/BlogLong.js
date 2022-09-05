@@ -10,11 +10,18 @@ export default function BlogLong({ blog }) {
   const editDate = blog.dateModified ? new Date(blog.dateModified) : undefined;
   return (
     <div className={Styles.BlogFull}>
-      <div>
-        {blog.coverImage !== null ? <div><img src={blog.coverImage.url}/></div> : ""}
+      <div className={Styles.BlogHeader}>
+        {blog.coverImageURL !== null ? (
+          <div>
+            <img src={blog.coverImageURL} alt={blog.coverImageAlt} />
+          </div>
+        ) : (
+          ""
+        )}
         <h1>{blog.title}</h1>
         <div>
           <p>
+            By:&nbsp;
             <Link href="/">
               <a>Michał Rajzer</a>
             </Link>
@@ -27,7 +34,7 @@ export default function BlogLong({ blog }) {
           </p>
           {editDate !== undefined ? (
             <p>
-              Edited at:
+              Edited at:&nbsp;
               <time dateTime={editDate.toISOString()}>
                 {editDate.toLocaleDateString("en-GB")}
               </time>

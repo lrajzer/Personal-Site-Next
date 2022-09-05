@@ -12,10 +12,10 @@ export default function BlogShort(props) {
 
   const thisBlog = props.blog;
   const image =
-    thisBlog.coverImage !== null ? (
+    thisBlog.coverImageURL !== null ? (
       <img
-        src={thisBlog.coverImage.url}
-        alt={thisBlog.coverImage.alt}
+        src={thisBlog.coverImageURL}
+        alt={thisBlog.coverImageAlt}
         className={styles.CoverImage}
       />
     ) : (

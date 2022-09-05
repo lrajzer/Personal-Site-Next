@@ -13,7 +13,7 @@ export default function Navbar(props) {
   return (
     <div className={styles.navigation}>
       <nav className={styles.navbar}>
-        <Link href={asPath}>
+        <Link href={path?"/"+path:"/"}>
           <a className={styles.navLink}>Michał.Rajzer({inBrackets})</a>
         </Link>
         <Link href="/">
