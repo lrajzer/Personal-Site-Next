@@ -8,12 +8,11 @@ import connectDB from "../../../components/db/connectDB.js";
 import BlogPost from "../../../components/db/models/BlogPost.js";
 
 export default withApiAuthRequired(async function addPost(req, res) {
-  const { uid, title, content } = req.query;
+  const { uid, title, content, imgSrc, imgAlt, tag } = req.query;
   const { user } = getSession(req, res);
   // console.log(user);
-  if (user.sub !== process.env.ADMINSUB)
-  {
-    res.status(401).json({ error: "unathorized" });
+  if (user.sub !== process.env.ADMINSUB) {
+    res.status(401).redirect("/");
     return 0;
   }
   if (!uid || !title || !content) {
@@ -35,8 +34,11 @@ export default withApiAuthRequired(async function addPost(req, res) {
       title: title,
       content: content,
       dateCreated: new Date(),
+      coverImageURL: imgSrc ? imgSrc : null,
+      coverImageAlt: imgAlt ? imgAlt : null,
+      type: tag ? tag : null,
     });
-    res.status(200).json({ post: newPost });
+    res.status(200).redirect("/");
     return 0;
   }
   res.status(400).json({ error: "already exists" });
