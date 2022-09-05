@@ -12,7 +12,9 @@ const BlogPost = new Schema({
   commentIDs: { type: Schema.Types.Mixed },
   dateCreated: { type: Date, required: true },
   dateModified: { type: Date },
-  coverImage: { type: Schema.Types.Mixed },
+  coverImageURL: { type: String },
+  coverImageAlt: { type: String },
+  type: { type: String }, // Needed for future functionality
 });
 
-export default models.BlogPost || model('BlogPost', BlogPost);
+export default models.BlogPost || model("BlogPost", BlogPost);
