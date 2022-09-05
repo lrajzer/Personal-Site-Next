@@ -29,12 +29,12 @@ export default function Home() {
         <div className={`${styles.textBlock} ${styles.textOne}`}>
           <h2 className={styles.headTwo}>A few words about me.</h2>
           <p>
-            Right now I&apos;m attending Computer Science undergraduate studies at
-            --REDATCTED--. In highschool I took part in the IB Programme where I
-            took higher level computer science, physics and maths courses. I
-            started my adventure with programming at 12 when my father
-            introduced me to Arduino. Since then I moved toward web development
-            but I still dabble in IOT and robotics.
+            Right now I&apos;m attending Computer Science undergraduate studies
+            at the Silesian University of Technology. In highschool I took part
+            in the IB Programme where I took higher level computer science,
+            physics and maths courses. I started my adventure with programming
+            at 12 when my father introduced me to Arduino. Since then I moved
+            toward web development but I still dabble in IOT and robotics.
           </p>
         </div>
         <div className={`${styles.spacer} ${styles.spacerTwo}`}></div>
