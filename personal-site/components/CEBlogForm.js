@@ -15,7 +15,8 @@ export default function Form({blog, type}) {
           id="title"
           name="title"
           required
-          defaultValue={thisBlog ? thisBlog.title : "Please enter the title"}
+          defaultValue={thisBlog ? thisBlog.title : ""}
+          placeholder="Title"
         />
         <label htmlFor="uid">uid</label>
         {thisBlog ? (
@@ -27,8 +28,14 @@ export default function Form({blog, type}) {
             readOnly
           />
         ) : (
-          <input type="text" name="uid" id="uid" required />
-        )}{" "}
+          <input
+            type="text"
+            name="uid"
+            id="uid"
+            required
+            placeholder="Unique ID (and subpage) of the blog"
+          />
+        )}
         <label htmlFor="type">type</label>
         {thisBlog ? (
           <input
@@ -39,32 +46,39 @@ export default function Form({blog, type}) {
             readOnly
           />
         ) : (
-          <input type="text" name="tag" id="tag" required />
+          <input
+            type="text"
+            name="tag"
+            id="tag"
+            required
+            placeholder="Tag of the blog"
+          />
         )}
         <label htmlFor="content">Content</label>
-        <textarea name="content" id="content" rows="20" cols="50" required defaultValue={thisBlog ? thisBlog.content : "Please enter the content of the blog"
-        }/>
+        <textarea
+          name="content"
+          id="content"
+          rows="20"
+          cols="50"
+          required
+          defaultValue={thisBlog ? thisBlog.content : ""}
+          placeholder="Content of the blog, can use HTML"
+        />
         <label htmlFor="imgSrc">Cover image URL</label>
         <input
           type="text"
           name="imgSrc"
           id="imgSrc"
-          defaultValue={
-            thisBlog
-              ? thisBlog.coverImageURL
-              : ""
-          }
-        />{" "}
+          defaultValue={thisBlog ? thisBlog.coverImageURL : ""}
+          placeholder="Cover image URL"
+        />
         <label htmlFor="imgAlt">Cover image alternative text</label>
         <input
           type="text"
           name="imgAlt"
           id="imgAlt"
-          defaultValue={
-            thisBlog
-              ? thisBlog.coverImageAlt
-              : ""
-          }
+          defaultValue={thisBlog ? thisBlog.coverImageAlt : ""}
+          placeholder="Alt text for the cover image."
         />
         <button type="submit" className={Styles.Submit}>
           Submit
