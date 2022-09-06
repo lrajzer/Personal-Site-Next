@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.9.1",
+    "@sendgrid/mail": "^7.7.0",
     "he": "^1.2.0",
     "mongoose": "^6.5.2",
     "next": "12.2.5",
