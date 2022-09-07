@@ -11,8 +11,10 @@ export default function Footer(props) {
         <Link href="">
           <a className={styles.link}>My CV</a>
         </Link>
-        <Link href="">
-          <a className={styles.link}>Privacy policy</a>
+        <Link href="https://www.iubenda.com/privacy-policy/15454240" passHref>
+          <a target="_blank" rel="noopener noreferrer" className={styles.link}>
+            Privacy policy
+          </a>
         </Link>
         <Link href="/">
           <a className={`${styles.link} ${styles.noMobile}`}>About me</a>
