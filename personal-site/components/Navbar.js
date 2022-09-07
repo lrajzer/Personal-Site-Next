@@ -25,7 +25,7 @@ export default function Navbar(props) {
         <Link href="/blog">
           <a className={styles.navLink}>Blog</a>
         </Link>
-        <Link href="#">
+        <Link href="/contact">
           <a className={styles.navLink}>Contact</a>
         </Link>
       </nav>
