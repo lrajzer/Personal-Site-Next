@@ -1,4 +1,5 @@
 import sendgrid from "@sendgrid/mail";
+import TagRemover from "../../../utils/TagRemover";
 
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -37,18 +38,9 @@ async function sendEmail(req, res) {
       await sendgrid.send({
         to: "michal.rajzer03+personalSiteContact@gmail.com", // Your email where you'll receive emails
         from: "contact@em6598.rajzer.dev", // your website email address here
-        subject: [subject, "; Type: ", type].join(" "),
-        html: `Sent by: ${email
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#039;")}<br />Message:<br />${content
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#039;")}`,
+        subject: [TagRemover(subject), "; Type: ", type].join(" "),
+        html: `Sent by: ${TagRemover(email)}<br />Message:<br />
+        ${TagRemover(content)}`,
       });
     } catch (error) {
       console.log(error);
