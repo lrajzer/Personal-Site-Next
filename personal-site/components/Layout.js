@@ -36,7 +36,7 @@ export default function Layout(props) {
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <main>
-        <Navbar inBrackets={props.inBrackets}/>
+        <Navbar inBrackets={props.inBrackets} pl={props.pl}/>
         <div className={styles.content}>{props.children}</div>
         <Footer />
       </main>

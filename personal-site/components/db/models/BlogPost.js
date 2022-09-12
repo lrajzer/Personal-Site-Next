@@ -9,7 +9,7 @@ const BlogPost = new Schema({
   },
   title: { type: String, required: true },
   content: { type: String, required: true },
-  commentIDs: { type: Schema.Types.Mixed },
+  commentIDs: { type: Schema.Types.Mixed }, // Needed for future functionality
   dateCreated: { type: Date, required: true },
   dateModified: { type: Date },
   coverImageURL: { type: String },
