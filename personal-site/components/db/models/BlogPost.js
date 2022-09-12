@@ -14,6 +14,7 @@ const BlogPost = new Schema({
   dateModified: { type: Date },
   coverImageURL: { type: String },
   coverImageAlt: { type: String },
+  language: { type: String },
   type: { type: String }, // Needed for future functionality
 });
 
