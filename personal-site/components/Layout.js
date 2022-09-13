@@ -7,6 +7,19 @@ import { useRouter } from "next/router";
 
 export default function Layout(props) {
   const { asPath } = useRouter();
+  const altEngPaths = {
+    "": "pl",
+    blog: `/pl/${asPath}`,
+    contact: "/pl/kontakt",
+    projects: "/pl/projekty",
+    undefined:'pl'
+  };
+  const altPlPaths = {
+    undefined: "/",
+    blog: `${asPath.replace("/pl", "/")}`,
+    kontakt: "/contact",
+    projekty: "/projects",
+  };
   console.log(asPath)
   return (
     <>
@@ -44,16 +57,16 @@ export default function Layout(props) {
           {props.pl ? (
             <Link href={`${asPath.replace("/pl", "/")}`}>Pl</Link>
           ) : (
-            <Link href={`/pl/${asPath}`}>En</Link>
+            <Link href={altEngPaths[asPath.split('/')[1]]}>En</Link>
           )}
         </h6>
         <span>
           {props.pl ? (
-            <Link href={`${asPath.replace("/pl", "/")}`}>
+            <Link href={altPlPaths[asPath.split('/')[2]]}>
               Kliknij tu aby zmienić język
             </Link>
           ) : (
-            <Link href={`/pl/${asPath}`}>
+            <Link href={altEngPaths[asPath.split('/')[1]]}>
               Click here to change the language
             </Link>
           )}
