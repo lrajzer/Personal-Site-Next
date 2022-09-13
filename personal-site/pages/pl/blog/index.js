@@ -6,7 +6,7 @@ import BlogPost from "../../../components/db/models/BlogPost";
 
 export async function getServerSideProps() {
   await connectDB();
-  const blogs = await BlogPost.find({}).limit(5);
+  const blogs = await BlogPost.find({ lang: "pl" }).limit(5);
   const blogsSanitized = new Array();
   console.log(blogs.join())
   blogs.forEach((blog) =>

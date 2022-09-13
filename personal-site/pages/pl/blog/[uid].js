@@ -9,6 +9,26 @@ export async function getServerSideProps(context) {
 
   await connectDB();
   const blog = await BlogPost.findOne({ uid: uid });
+  
+  if (!blog)
+  {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  if (blog.lang !== "pl") 
+  {
+    return {
+      redirect: {
+        destination: `/blog/${uid}`,
+        permanent: true,
+      },
+    };
+  }
+  
   return {
     props: {
       blog: {
