@@ -15,19 +15,19 @@ export default function Navbar(props) {
   return (
     <div className={styles.navigation}>
       <nav className={styles.navbar}>
-        <Link href={path ? "/" + path : "/"}>
+        <Link href={asPath}>
           <a className={styles.navLink}>Michał.Rajzer({inBrackets})</a>
         </Link>
-        <Link href={props.pl?"/pl":"/"}>
+        <Link href={props.pl ? "/pl" : "/"}>
           <a className={styles.navLink}>{props.pl ? "O mnie" : "About"}</a>
         </Link>
-        <Link href={props.pl?"/pl/projekty":"/projects"}>
+        <Link href={props.pl ? "/pl/projekty" : "/projects"}>
           <a className={styles.navLink}>{props.pl ? "Projekty" : "Projects"}</a>
         </Link>
-        <Link href={props.pl?"/pl/blog":"/blog"}>
+        <Link href={props.pl ? "/pl/blog" : "/blog"}>
           <a className={styles.navLink}>Blog</a>
         </Link>
-        <Link href={props.pl?"/pl/kontakt":"/contact"}>
+        <Link href={props.pl ? "/pl/kontakt" : "/contact"}>
           <a className={styles.navLink}>{props.pl ? "Kontakt" : "Contact"}</a>
         </Link>
       </nav>
