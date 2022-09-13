@@ -54,7 +54,7 @@
 @media screen and (min-width: 769px) and (max-width: 1500px) {
   .navbar {
     padding: 0 2.5vw 0 2.5vw;
-    width: 95vw;
+    width: calc(100% - 5vw);
   }
 
   .navigation {
