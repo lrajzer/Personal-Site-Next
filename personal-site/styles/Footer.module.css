@@ -18,11 +18,7 @@
     text-align:center;
 }
 
-@media screen and (max-width: 768px) {
-    .footer {
-        margin-bottom: 6vh;
-    }
-}
+
 
 @media screen and (max-width: 1240px) {
     .footer {
@@ -37,5 +33,11 @@
     }
     .noMobile {
         display:none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .footer {
+        margin-bottom: 6vh;
     }
 }
