@@ -7,12 +7,13 @@ import { useRouter } from "next/router";
 
 export default function Layout(props) {
   const { asPath } = useRouter();
+  console.log(asPath.split('/'))
   const altEngPaths = {
     "": "pl",
-    blog: `/pl/${asPath}`,
+    blog: `/pl${asPath}`,
     contact: "/pl/kontakt",
-    projects: "/pl/projekty",
-    undefined:'pl'
+    projects: `/pl/projekty/${asPath.split('/')[3]?asPath.split('/')[3]:''}`,
+    undefined: "pl",
   };
   const altPlPaths = {
     undefined: "/",
@@ -55,18 +56,18 @@ export default function Layout(props) {
       <div className={styles.LangSwitch}>
         <h6>
           {props.pl ? (
-            <Link href={`${asPath.replace("/pl", "/")}`}>Pl</Link>
+            <Link href={altPlPaths[asPath.split("/")[2]]}>Pl</Link>
           ) : (
-            <Link href={altEngPaths[asPath.split('/')[1]]}>En</Link>
+            <Link href={altEngPaths[asPath.split("/")[1]]}>En</Link>
           )}
         </h6>
         <span>
           {props.pl ? (
-            <Link href={altPlPaths[asPath.split('/')[2]]}>
+            <Link href={altPlPaths[asPath.split("/")[2] ? asPath.split("/")[2]:'undefined']}>
               Kliknij tu aby zmienić język
             </Link>
           ) : (
-            <Link href={altEngPaths[asPath.split('/')[1]]}>
+            <Link href={altEngPaths[asPath.split("/")[1]]}>
               Click here to change the language
             </Link>
           )}
