@@ -9,13 +9,13 @@ export default function Home() {
   const ref = useRef();
   const isVisible = useOnScreen(ref);
   return (
-    <Layout title="About Michal Rajzer" pl={true}>
+    <Layout title="O mnie | Michal Rajzer" pl={true}>
       <div className={styles.contentBlockOne}>
         <div className={styles.nameHeader}>
           <div style={{ padding: 0, margin: 0 }}>
-            <h1>Hey!</h1>
-            <h1>My name is Michał</h1>
-            <h1>I&apos;m a fullstack developer!</h1>
+            <h1>Hej!</h1>
+            <h1>Jestem Michał</h1>
+            <h1>Jestem developerem fullstack!</h1>
           </div>
         </div>
         <svg className={styles.arrows}>
@@ -27,45 +27,45 @@ export default function Home() {
       </div>
       <div>
         <div className={`${styles.textBlock} ${styles.textOne}`}>
-          <h2 className={styles.headTwo}>A few words about me.</h2>
+          <h2 className={styles.headTwo}>Kilka słów o mnie.</h2>
           <p>
-            Right now I&apos;m attending Computer Science undergraduate studies
-            at the Silesian University of Technology. In highschool I took part
-            in the IB Programme where I took higher level computer science,
-            physics and maths courses. I started my adventure with programming
-            at 12 when my father introduced me to Arduino. Since then I moved
-            toward web development but I still dabble in IOT and robotics.
+            W chwili obecnej studiuję na kierunku Informatics Politechniki
+            Śląskiej. W liceum brałem udział w programie IB, wybrałem wtedy
+            rozszerzenia z fizyki, informatyki i matematyki. Moja przygoda z
+            programowaniem zaczęła się, gdy mój tata pokazał mi Arduino. Od tego
+            czasu przeszedłem w stronę webdev, ale nadal tworzę projekty
+            związane z IOT i robotyką.
           </p>
         </div>
         <div className={`${styles.spacer} ${styles.spacerTwo}`}></div>
         <div>
           <div className={`${styles.textBlock} ${styles.textTwo}`}>
             <table className={styles.tableList}>
-              <caption className={styles.tableCaption}>My skills:</caption>
+              <caption className={styles.tableCaption}>Moje umiejętności:</caption>
               <tbody>
                 <tr className={styles.tableRow}>
                   <td className={styles.tableItem}>Python 3</td>
-                  <td className={styles.tableItem}>Experienced</td>
+                  <td className={styles.tableItem}>Zaawansowany</td>
                   <td className={styles.tableItem}>[▉▉▉▉▉▉]</td>
                 </tr>
                 <tr className={styles.tableRow}>
                   <td className={styles.tableItem}>React/NextJS</td>
-                  <td className={styles.tableItem}>Experienced</td>
+                  <td className={styles.tableItem}>Zaawansowany</td>
                   <td className={styles.tableItem}>[▉▉▉▉▉]</td>
                 </tr>
                 <tr className={styles.tableRow}>
                   <td className={styles.tableItem}>TensorFlow 2</td>
-                  <td className={styles.tableItem}>Intermediate</td>
+                  <td className={styles.tableItem}>Średniozaawansowany</td>
                   <td className={styles.tableItem}>[▉▉▉▉]</td>
                 </tr>
                 <tr className={styles.tableRow}>
                   <td className={styles.tableItem}>C++</td>
-                  <td className={styles.tableItem}>Basic</td>
+                  <td className={styles.tableItem}>Podstawowy</td>
                   <td className={styles.tableItem}>[▉▉▉]</td>
                 </tr>
                 <tr className={styles.tableRow}>
                   <td className={styles.tableItem}>Arduino</td>
-                  <td className={styles.tableItem}>Basic</td>
+                  <td className={styles.tableItem}>Podstawowy</td>
                   <td className={styles.tableItem}>[▉▉▉]</td>
                 </tr>
               </tbody>
@@ -77,7 +77,7 @@ export default function Home() {
           <div className={`${styles.textBlock} ${styles.textThree}`}>
             <table className={styles.tableList}>
               <caption className={styles.tableCaption}>
-                <Link href="/projects">My Projects</Link>
+                <Link href="/pl/projekty">Moje projekty</Link>
               </caption>
               <tbody ref={ref}>
                 <tr className={styles.tableRow} style={{ textAlign: "center" }}>
