@@ -28,7 +28,7 @@ export default function Home({ blogs }) {
   return (
     <Layout pl={true}>
       <div className={styles.BlogContent}>
-        <h1>Welcome to my Blog</h1>
+        <h1>Witaj na moim blogu!</h1>
         <div>
           <ul>
             {blogs.map((blog) => (
