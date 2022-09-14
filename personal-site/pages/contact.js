@@ -12,11 +12,9 @@ export default function Contact() {
       const { email, subject, type, content } = e.target;
       
       if (!executeRecaptcha) {
-        console.log("Execute recaptcha not yet available");
         return;
       }
       executeRecaptcha("enquiryFormSubmit").then((gReCaptchaToken) => {
-        console.log(gReCaptchaToken, "response Google reCaptcha server");
         fetch("/api/contact/sendEmail", {
           method: "POST",
           headers: {
