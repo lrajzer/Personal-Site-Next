@@ -80,6 +80,10 @@ export default function Form({blog, type}) {
           defaultValue={thisBlog ? thisBlog.coverImageAlt : ""}
           placeholder="Alt text for the cover image."
         />
+        <div>
+          <label htmlFor="lang" style={{paddingRight: 25}}>Blog is in Polish?</label>
+          <input type="checkbox" name="lang" id="lang" />
+        </div>
         <button type="submit" className={Styles.Submit}>
           Submit
         </button>
