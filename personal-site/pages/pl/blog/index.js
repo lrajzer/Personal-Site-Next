@@ -18,6 +18,7 @@ export async function getServerSideProps() {
       dateModified: blog.dateModified ? blog.dateModified.toISOString() : null,
       coverImageURL: blog.coverImageURL ? blog.coverImageURL : null, //"https://i.imgur.com/m0SctLi.jpeg"
       coverImageAlt: blog.coverImageAlt ? blog.coverImageAlt : null, //"Swimmy cat"
+      lang: 'pl',
     })
   );
   console.log(blogsSanitized);

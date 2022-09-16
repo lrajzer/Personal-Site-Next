@@ -41,6 +41,7 @@ export async function getServerSideProps(context) {
           : null,
         coverImageURL: blog.coverImageURL ? blog.coverImageURL : null, //"https://i.imgur.com/m0SctLi.jpeg"
         coverImageAlt: blog.coverImageAlt ? blog.coverImageAlt : null, //"Swimmy cat"
+        lang: "en",
       },
     },
   };
@@ -48,7 +49,7 @@ export async function getServerSideProps(context) {
 
 export default function Blog({ blog }) {
   return (
-    <Layout>
+    <Layout isMonoLang={true}>
       <BlogLong blog={blog} />
     </Layout>
   );
