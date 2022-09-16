@@ -50,7 +50,9 @@ export default function BlogShort(props) {
             </p>
             {
               <time dateTime={date.toISOString()} className={styles.Date}>
-                {date.toLocaleDateString("en-GB")}
+                {thisBlog.lang == "en"
+                  ? date.toLocaleDateString("en-GB")
+                  : date.toLocaleDateString("pl-PL")}
               </time>
             }
           </div>

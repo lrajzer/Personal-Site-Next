@@ -21,22 +21,26 @@ export default function BlogLong({ blog }) {
         <h1>{blog.title}</h1>
         <div>
           <p>
-            By:&nbsp;
+            {blog.lang == "en" ? "By: " : "Przez: "}
             <Link href="/">
               <a>Michał Rajzer</a>
             </Link>
           </p>
           <p>
-            Created at:&nbsp;
+            {blog.lang == "en" ? "Created at: " : "Utworzone: "}
             <time dateTime={creationDate.toISOString()}>
-              {creationDate.toLocaleDateString("en-GB")}
+              {blog.lang == "en"
+                ? creationDate.toLocaleDateString("en-GB")
+                : creationDate.toLocaleDateString("pl-PL")}
             </time>
           </p>
           {editDate !== undefined ? (
             <p>
-              Edited at:&nbsp;
+              {blog.lang == "en" ? "Edited at: " : "Zmienione: "}
               <time dateTime={editDate.toISOString()}>
-                {editDate.toLocaleDateString("en-GB")}
+                {blog.lang == "en"
+                  ? editDate.toLocaleDateString("en-GB")
+                  : editDate.toLocaleDateString("pl-PL")}
               </time>
             </p>
           ) : (
