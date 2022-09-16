@@ -19,7 +19,7 @@ export default function Navbar(props) {
           <a className={styles.navLink}>Michał.Rajzer({inBrackets})</a>
         </Link>
         <Link href={props.pl ? "/pl" : "/"}>
-          <a className={styles.navLink}>{props.pl ? "O mnie" : "About"}</a>
+          <a className={styles.navLink}>{props.pl ? "O mnie" : "About me"}</a>
         </Link>
         <Link href={props.pl ? "/pl/projekty" : "/projects"}>
           <a className={styles.navLink}>{props.pl ? "Projekty" : "Projects"}</a>
