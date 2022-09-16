@@ -1,32 +1,37 @@
 import styles from "../styles/Footer.module.css";
 import Link from "next/link";
 
-export default function Footer(props) {
+export default function Footer({pl}) {
   return (
     <footer className={styles.footer}>
       <div className={styles.links}>
         <Link href="">
-          <a className={styles.link}> My resume</a>
+          <a className={styles.link}>Resume</a>
         </Link>
         <Link href="">
-          <a className={styles.link}>My CV</a>
+          <a className={styles.link}>CV</a>
         </Link>
         <Link href="https://www.iubenda.com/privacy-policy/15454240" passHref>
           <a target="_blank" rel="noopener noreferrer" className={styles.link}>
-            Privacy policy
+            {pl ? "Polityka prywatności" : "Privacy policy"}
           </a>
         </Link>
-        <Link href="/">
-          <a className={`${styles.link} ${styles.noMobile}`}>About me</a>
+        <Link href={pl ? "/pl" : "/"}>
+          <a className={`${styles.link} ${styles.noMobile}`}>
+            {pl ? "O mnie" : "About me"}
+          </a>
         </Link>
-        <Link href="">
-          <a className={`${styles.link} ${styles.noMobile}`}>Contact me</a>
+        <Link href={pl ? "/kontakt" : "/contact"}>
+          <a className={`${styles.link} ${styles.noMobile}`}>
+            {pl ? "Kontakt" : "Contact"}
+          </a>
         </Link>
         <Link href="/blog">
-          <a className={`${styles.link} ${styles.noMobile}`}>My blog</a>
+          <a className={`${styles.link} ${styles.noMobile}`}>Blog</a>
         </Link>
-        <Link href="/projects">
-          <a className={`${styles.link} ${styles.noMobile}`}>My projects</a>
+        <Link href={pl ? "/projekty" : "/projects"}>
+          <a className={`${styles.link} ${styles.noMobile}`}>
+            {pl ? "Projekty" : "Projects"}</a>
         </Link>
       </div>
     </footer>
