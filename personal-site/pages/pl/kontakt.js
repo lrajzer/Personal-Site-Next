@@ -12,11 +12,9 @@ export default function Contact() {
       const { email, subject, type, content } = e.target;
       
       if (!executeRecaptcha) {
-        console.log("Execute recaptcha not yet available");
         return;
       }
       executeRecaptcha("enquiryFormSubmit").then((gReCaptchaToken) => {
-        console.log(gReCaptchaToken, "response Google reCaptcha server");
         fetch("/api/contact/sendEmail", {
           method: "POST",
           headers: {
@@ -35,15 +33,15 @@ export default function Contact() {
           .then((res) =>
             res.errors
               ? alert(
-                  `There was an error with Your message!\nYour message was missing: ${res?.errors}.`
+                  `Z twoją wiadomością był problem!\nW twojej wiadomości brakowało: ${res?.errors}.`
                 )
               : res.error
               ? alert(
-                  "Internal server error!\nContact me directly at michal.rajzer03@gmail.com"
+                  "Wewnętrzny błąd serwera!\nSkontaktuj się ze mną bezpośrednio: michal.rajzer03@gmail.com"
                 )
               : res.ReCAPTCHAError
               ? alert(
-                  "You reCAPTCHA score was too low to send Your message.\nYou can contact me at michal.rajzer03 at gmail.com"
+                  "Twoja wartość reCaptcha była za niska.\nMożesz się ze mną skontaktować na: michal.rajzer03 (małpa) gmail.com"
                 )
               : alert("Your message has been sent!")
           );
@@ -57,42 +55,42 @@ export default function Contact() {
         <div className={Styles.Headers}>
           <div>
             <label className={Styles.FormLabel} htmlFor="email">
-              Your email adress &#40;so I can respond to Your message&#41;.
+              Twój adress email &#40;abym mógł odpowiedzieć na Twoją wiadomość&#41;.
             </label>
             <input
               type="text"
               name="email"
               id="email"
               className={Styles.FormInput}
-              placeholder="Your email"
+              placeholder="Twój email"
               required
             />
           </div>
           <div>
             <label className={Styles.FormLabel} htmlFor="type">
-              Why are You contacting me?
+              Czemu chcesz się ze mną skontaktować?
             </label>
             <select type="text" name="type" id="type" className={Styles.Type}>
-              <option value="contact">I want to hire You!</option>
-              <option value="bug">I want to report a bug!</option>
-              <option value="other">Other!</option>
+              <option value="contact">Chcę Cię zatrudnić!</option>
+              <option value="bug">Chcę zgłosić błąd na stronie!</option>
+              <option value="other">Coś innego!</option>
             </select>
           </div>
         </div>
         <div className={Styles.EmailContent}>
           <label className={Styles.FormLabel} htmlFor="subject">
-            The subject of Your message.
+            Temat Twojej wiadomości
           </label>
           <input
             type="text"
             name="subject"
             id="subject"
             className={Styles.FormInput}
-            placeholder="Subject"
+            placeholder="Temat"
             required
           />
           <label className={Styles.FormLabel} htmlFor="content">
-            Please elaborate.
+            Proszę rozwiń dalej.
           </label>
           <textarea
             rows={10}
@@ -100,12 +98,12 @@ export default function Contact() {
             name="content"
             id="content"
             className={Styles.FormInput}
-            placeholder="Your message"
+            placeholder="Twoja wiadomość"
             required
           />
         </div>
         <button type="submit" id="submit" className={Styles.Submit}>
-          Submit
+          Wyślij
         </button>
       </form>
     </Layout>
