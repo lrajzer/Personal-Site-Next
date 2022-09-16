@@ -42,6 +42,7 @@
   }
 
   .LangSwitch {
+    background-color: white;
     top: 30%;
     left: calc(100% - 90px);
     width: 85px;
@@ -49,6 +50,7 @@
   }
 
   .LangSwitch > h6 {
+    filter: invert();
     line-height: 85px;
     font-size: 45px;
   }
@@ -56,6 +58,7 @@
   .LangSwitch:hover {
     left: calc(100% - 505px);
     width: 500px;
+    filter: invert();
   }
 
   .LangSwitch:hover > span {
@@ -84,7 +87,6 @@
   }
 
   .LangSwitch > h6 {
-    isolation: isolate;
     filter: invert();
     line-height: 85px;
     font-size: 45px;
