@@ -5,14 +5,23 @@ import Footer from "./Footer";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export default function Layout(props) {
+export default function Layout({
+  title,
+  description,
+  pl,
+  inBrackets,
+  children,
+  isMonoLang,
+}) {
   const { asPath } = useRouter();
-  console.log(asPath.split('/'))
+  console.log(asPath.split("/"));
   const altEngPaths = {
     "": "pl",
     blog: `/pl${asPath}`,
     contact: "/pl/kontakt",
-    projects: `/pl/projekty/${asPath.split('/')[3]?asPath.split('/')[3]:''}`,
+    projects: `/pl/projekty/${
+      asPath.split("/")[3] ? asPath.split("/")[3] : ""
+    }`,
     undefined: "pl",
   };
   const altPlPaths = {
@@ -21,16 +30,16 @@ export default function Layout(props) {
     kontakt: "/contact",
     projekty: "/projects",
   };
-  console.log(asPath)
+  console.log(asPath);
   return (
     <>
       <Head>
-        <title>{props.title ? props.title : "Michal Rajzer"}</title>
+        <title>{title ? title : "Michal Rajzer"}</title>
         <meta
           name="description"
           content={
-            props.description
-              ? props.description
+            description
+              ? description
               : "Michal Rajzer's site, created using NextJs and MongoDB"
           }
         />
@@ -53,30 +62,41 @@ export default function Layout(props) {
         />
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
-      <div className={styles.LangSwitch}>
-        <h6>
-          {props.pl ? (
-            <Link href={altPlPaths[asPath.split("/")[2]]}>Pl</Link>
-          ) : (
-            <Link href={altEngPaths[asPath.split("/")[1]]}>En</Link>
-          )}
-        </h6>
-        <span>
-          {props.pl ? (
-            <Link href={altPlPaths[asPath.split("/")[2] ? asPath.split("/")[2]:'undefined']}>
-              Kliknij tu aby zmienić język
-            </Link>
-          ) : (
-            <Link href={altEngPaths[asPath.split("/")[1]]}>
-              Click here to change the language
-            </Link>
-          )}
-        </span>
-      </div>
+      {isMonoLang ? (
+        ""
+      ) : (
+        <div className={styles.LangSwitch}>
+          <h6>
+            {pl ? (
+              <Link href={altPlPaths[asPath.split("/")[2]]}>Pl</Link>
+            ) : (
+              <Link href={altEngPaths[asPath.split("/")[1]]}>En</Link>
+            )}
+          </h6>
+          <span>
+            {pl ? (
+              <Link
+                href={
+                  altPlPaths[
+                    asPath.split("/")[2] ? asPath.split("/")[2] : "undefined"
+                  ]
+                }
+              >
+                Kliknij tu aby zmienić język
+              </Link>
+            ) : (
+              <Link href={altEngPaths[asPath.split("/")[1]]}>
+                Click here to change the language
+              </Link>
+            )}
+          </span>
+        </div>
+      )}
+
       <main>
-        <Navbar inBrackets={props.inBrackets} pl={props.pl} />
-        <div className={styles.content}>{props.children}</div>
-        <Footer />
+        <Navbar inBrackets={inBrackets} pl={pl} />
+        <div className={styles.content}>{children}</div>
+        <Footer pl={pl}/>
       </main>
     </>
   );
