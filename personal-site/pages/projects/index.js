@@ -1,6 +1,7 @@
 import Layout from "../../components/Layout";
 import styles from "../../styles/Projects.module.css";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Projects() {
   return (
@@ -19,6 +20,25 @@ export default function Projects() {
               <Link href="/projects/python">
                 <a className={styles.projectsHeading}>Python</a>
               </Link>
+              <a
+                href="https://github.com/MichalRajzer/Sudoku-Solver"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <h2 className={styles.projectTitle}>Sudoku solver</h2>
+                <p className={styles.projectDescription}>
+                  This was a simple recursive backtracking solver that I tried
+                  to speedrun, without touching Python for more or less half a
+                  year.
+                </p>
+                <div className={styles.projImgWrapper}>
+                  <Image
+                    src="/imgs/solver.png"
+                    layout="fill"
+                    objectFit="contain"
+                  />
+                </div>
+              </a>
             </div>
             <div className={styles.project}>
               <Link href="/projects/javascript">
