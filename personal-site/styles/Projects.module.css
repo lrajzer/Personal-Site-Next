@@ -53,7 +53,14 @@
 }
 
 .embededMPT {
-  width: 70%;
+  width: 80%;
+  aspect-ratio: 1;
+}
+
+.projImgWrapper {
+  margin: auto;
+  position: relative;
+  width: 80%;
   aspect-ratio: 1;
 }
 
