@@ -5,9 +5,9 @@ export default function Footer({ pl }) {
   return (
     <footer className={styles.footer}>
       <div className={styles.links}>
-        <Link href="">
+        {/* <Link href="">
           <a className={styles.link}>Resume</a>
-        </Link>
+        </Link> */}
         <a className={styles.link} href="/docs/CV_def.pdf">
           CV
         </a>
