@@ -9,6 +9,10 @@
   display: table;
 }
 
+.projectList {
+  margin: 2vh 8vw;
+}
+
 .row {
   display: table-row;
 }
@@ -30,7 +34,6 @@
   padding-top: 1vh;
   padding-bottom: 1vh;
   text-align: center;
-  width: 33.333%;
 }
 
 .project {
@@ -49,7 +52,6 @@
   padding-bottom: 0.75vh;
   text-align: center;
   font-size: 1.5em;
-  width: 100%;
 }
 
 .embededMPT {
@@ -64,12 +66,32 @@
   aspect-ratio: 1;
 }
 
+.projectImgWrapper {
+  position: relative;
+  width: 30vw;
+  aspect-ratio: 1;
+}
+
+.projectDetails {
+  display: flex;
+}
+
 @media screen and (max-width: 768px) {
   .mainContent {
     min-height: 88vh;
     padding-left: 2vw;
     padding-top: 2vh;
     padding-right: 2vw;
+  }
+
+  .projectImgWrapper {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .projectDetails {
+    flex-direction: column;
   }
 
   .projectsTable {
@@ -96,10 +118,18 @@
   .mainContent {
     min-height: 88vh;
   }
+
+  .projectDetails {
+    flex-direction: row;
+  }
 }
 
 @media screen and (min-width: 1500px) {
   .mainContent {
     min-height: 86vh;
+  }
+
+  .projectDetails {
+    flex-direction: row;
   }
 }
