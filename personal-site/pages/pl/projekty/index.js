@@ -6,22 +6,22 @@ export default function Projects() {
   return (
     <Layout pl={true}>
       <div className={styles.mainContent}>
-        <h1 className={styles.projectsTitle}>My projects</h1>
+        <h1 className={styles.projectsTitle}>Moje projekty</h1>
         <h2 className={styles.projectsCaption}>
-          It&apos;s best to check out each project by clicking on it&apos;s
-          name.
+          Najlepiej sprawdzić każdy projekt klikając w nazwe.
           <br />
-          To explore more projects from each category, click on the language.
+          Aby zobaczyć więcej projektów z danej kategorii, kliknij w nazwe
+          języka.
         </h2>
         <section className={styles.projectsTable}>
           <div className={styles.row}>
             <div className={styles.project}>
-              <Link href="/projects/python">
+              <Link href="/pl/projekty/python">
                 <a className={styles.projectsHeading}>Python</a>
               </Link>
             </div>
             <div className={styles.project}>
-              <Link href="/projects/javascript">
+              <Link href="/pl/projekty/javascript">
                 <a className={styles.projectsHeading}>Javascript</a>
               </Link>
               <a
@@ -31,8 +31,8 @@ export default function Projects() {
               >
                 <h2 className={styles.projectTitle}>MyPronouns.Tech</h2>
                 <p className={styles.projectDescription}>
-                  This is a simple webpage and API desinged to help people use
-                  correct pronouns instead of the generic they/them
+                  Prosta strona i API które mają na celu ułatwić ludziom
+                  używanie odpowiednich zaimków.
                 </p>
                 <embed
                   type="text/html"
@@ -42,7 +42,7 @@ export default function Projects() {
               </a>
             </div>
             <div className={styles.project}>
-              <Link href="/projects/arduino">
+              <Link href="/pl/projekty/arduino">
                 <a className={styles.projectsHeading}>Arduino</a>
               </Link>
             </div>
