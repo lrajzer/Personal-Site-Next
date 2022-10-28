@@ -21,13 +21,14 @@ export default function Javascript() {
             >
               I created a website and an API that allows people and developers
               to use accurate pronouns. The main part of the page is the
-              "business card" section which allows users to create small
-              personalized pages that can contain anything from their preffered
-              pronouns to links to their social media sites. The secondary part
-              of the site is an API that takes information from the "business
-              card" database to allow developers access to the pronouns of their
-              users to enable better personalization. I used Next.js and MongoDB
-              as the backbone of this project.
+              &ldquo;business card&rdquo; section which allows users to create
+              small personalized pages that can contain anything from their
+              preffered pronouns to links to their social media sites. The
+              secondary part of the site is an API that takes information from
+              the &ldquo;business card&rdquo; database to allow developers
+              access to the pronouns of their users to enable better
+              personalization. I used Next.js and MongoDB as the backbone of
+              this project.
             </p>
           </div>
         </li>
@@ -42,7 +43,7 @@ export default function Javascript() {
                 width: "calc(100% - 1vw)",
               }}
             >
-              This is the site that You're on right now. I created it as my
+              This is the site that You&apos;re on right now. I created it as my
               portfolio and blog. I used Next.js and MongoDB to create it. It
               uses a mix of server-side rendering and compile-time rendered
               sites. Some additonal technologies that I employed were ReCAPTCHA
