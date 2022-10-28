@@ -39,8 +39,8 @@ export default function BlogShort(props) {
         <div className={styles.Titular}>
           <div>
             <h3>
-              <Link href={`/blog/${thisBlog.uid}`}>
-                <a className={styles.Title}>{thisBlog.title}</a>
+              <Link href={`/blog/${thisBlog.uid}`} className={styles.Title}>
+                {thisBlog.title}
               </Link>
             </h3>
           </div>

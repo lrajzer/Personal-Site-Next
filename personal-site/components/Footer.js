@@ -11,28 +11,34 @@ export default function Footer({ pl }) {
         <a className={styles.link} href="/docs/CV_def.pdf">
           CV
         </a>
-        <Link href="https://www.iubenda.com/privacy-policy/15454240" passHref>
-          <a target="_blank" rel="noopener noreferrer" className={styles.link}>
-            {pl ? "Polityka prywatności" : "Privacy policy"}
-          </a>
+        <a
+          href="https://www.iubenda.com/privacy-policy/15454240"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.link}
+        >
+          {pl ? "Polityka prywatności" : "Privacy policy"}
+        </a>
+        <Link
+          href={pl ? "/pl" : "/"}
+          className={`${styles.link} ${styles.noMobile}`}
+        >
+          {pl ? "O mnie" : "About me"}
         </Link>
-        <Link href={pl ? "/pl" : "/"}>
-          <a className={`${styles.link} ${styles.noMobile}`}>
-            {pl ? "O mnie" : "About me"}
-          </a>
+        <Link
+          href={pl ? "/kontakt" : "/contact"}
+          className={`${styles.link} ${styles.noMobile}`}
+        >
+          {pl ? "Kontakt" : "Contact"}
         </Link>
-        <Link href={pl ? "/kontakt" : "/contact"}>
-          <a className={`${styles.link} ${styles.noMobile}`}>
-            {pl ? "Kontakt" : "Contact"}
-          </a>
+        <Link href="/blog" className={`${styles.link} ${styles.noMobile}`}>
+          Blog
         </Link>
-        <Link href="/blog">
-          <a className={`${styles.link} ${styles.noMobile}`}>Blog</a>
-        </Link>
-        <Link href={pl ? "/projekty" : "/projects"}>
-          <a className={`${styles.link} ${styles.noMobile}`}>
-            {pl ? "Projekty" : "Projects"}
-          </a>
+        <Link
+          href={pl ? "/projekty" : "/projects"}
+          className={`${styles.link} ${styles.noMobile}`}
+        >
+          {pl ? "Projekty" : "Projects"}
         </Link>
       </div>
     </footer>

@@ -3,9 +3,8 @@
 import Link from "next/link";
 import Styles from "../styles/Blog.module.css";
 
-
 export default function BlogLong({ blog }) {
-  console.log(blog)
+  console.log(blog);
   const creationDate = new Date(blog.dateCreated);
   const editDate = blog.dateModified ? new Date(blog.dateModified) : undefined;
   return (
@@ -22,9 +21,7 @@ export default function BlogLong({ blog }) {
         <div>
           <p>
             {blog.lang == "en" ? "By: " : "Przez: "}
-            <Link href="/">
-              <a>Michał Rajzer</a>
-            </Link>
+            <Link href="/">Michał Rajzer</Link>
           </p>
           <p>
             {blog.lang == "en" ? "Created at: " : "Utworzone: "}

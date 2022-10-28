@@ -16,13 +16,19 @@ export default function Projects() {
         <section className={styles.projectsTable}>
           <div className={styles.row}>
             <div className={styles.project}>
-              <Link href="/pl/projekty/python">
-                <a className={styles.projectsHeading}>Python</a>
+              <Link
+                href="/pl/projekty/python"
+                className={styles.projectsHeading}
+              >
+                Python
               </Link>
             </div>
             <div className={styles.project}>
-              <Link href="/pl/projekty/javascript">
-                <a className={styles.projectsHeading}>Javascript</a>
+              <Link
+                href="/pl/projekty/javascript"
+                className={styles.projectsHeading}
+              >
+                Javascript
               </Link>
               <a
                 href="https://mypronouns.tech"
@@ -42,8 +48,11 @@ export default function Projects() {
               </a>
             </div>
             <div className={styles.project}>
-              <Link href="/pl/projekty/arduino">
-                <a className={styles.projectsHeading}>Arduino</a>
+              <Link
+                href="/pl/projekty/arduino"
+                className={styles.projectsHeading}
+              >
+                Arduino
               </Link>
             </div>
           </div>

@@ -8,6 +8,25 @@ export default function Javascript() {
       <h1 className={styles.projectsTitle}>My Javascript Projects</h1>
       <ul className={styles.projectList}>
         <li style={{ marginTop: "5vh", marginBottom: "5vh" }}>
+          <h3 className={styles.projectsHeading}>TTFonte.com</h3>
+          <div className={styles.projectDetails}>
+            <p
+              className={styles.projectDescription}
+              style={{
+                textAlign: "justify",
+                marginLeft: "1vw",
+                width: "calc(100% - 1vw)",
+              }}
+            >
+              This is a site that I developed as part of my job. It uses Next.js
+              as its framework, and it heavily utilizes specific features that
+              appear directly in Next.js, such as image optimization and
+              advanced prefetching. Additionally I used ReCAPTCHA v3, and
+              sendgrid to add some features that my employer wanted.
+            </p>
+          </div>
+        </li>
+        <li style={{ marginTop: "5vh", marginBottom: "5vh" }}>
           <h3 className={styles.projectsHeading}>MyPronouns.tech</h3>
           <div className={styles.projectDetails}>
             <div className={styles.projectImgWrapper}></div>

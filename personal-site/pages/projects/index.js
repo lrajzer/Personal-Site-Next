@@ -17,8 +17,8 @@ export default function Projects() {
         <section className={styles.projectsTable}>
           <div className={styles.row}>
             <div className={styles.project}>
-              <Link href="/projects/python">
-                <a className={styles.projectsHeading}>Python</a>
+              <Link href="/projects/python" className={styles.projectsHeading}>
+                Python
               </Link>
               <a
                 href="https://github.com/MichalRajzer/Sudoku-Solver"
@@ -41,29 +41,28 @@ export default function Projects() {
               </a>
             </div>
             <div className={styles.project}>
-              <Link href="/projects/javascript">
-                <a className={styles.projectsHeading}>Javascript</a>
-              </Link>
-              <a
-                href="https://mypronouns.tech"
-                target="_blank"
-                rel="noreferrer"
+              <Link
+                href="/projects/javascript"
+                className={styles.projectsHeading}
               >
-                <h2 className={styles.projectTitle}>MyPronouns.Tech</h2>
+                Javascript
+              </Link>
+              <a href="https://ttfonte.com/" target="_blank" rel="noreferrer">
+                <h2 className={styles.projectTitle}>TTFonte.com</h2>
                 <p className={styles.projectDescription}>
-                  This is a simple webpage and API desinged to help people use
-                  correct pronouns instead of the generic they/them
+                  This is a simple webpage created by me for my current
+                  employer. It uses Next.JS as the framework.
                 </p>
                 <embed
                   type="text/html"
-                  src="https://mypronouns.tech"
+                  src="https://ttfonte.com/"
                   className={styles.embededMPT}
                 />
               </a>
             </div>
             <div className={styles.project}>
-              <Link href="/projects/arduino">
-                <a className={styles.projectsHeading}>Arduino</a>
+              <Link href="/projects/arduino" className={styles.projectsHeading}>
+                Arduino
               </Link>
             </div>
           </div>
