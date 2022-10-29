@@ -2,6 +2,7 @@ import Layout from "../../components/Layout";
 import styles from "../../styles/Projects.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import pythonSolver from "../../public/imgs/solver.png";
 
 export default function Projects() {
   return (
@@ -33,9 +34,10 @@ export default function Projects() {
                 </p>
                 <div className={styles.projImgWrapper}>
                   <Image
-                    src="/imgs/solver.png"
+                    src={pythonSolver}
+                    alt="Image of a sudoku solver in Python."
                     layout="fill"
-                    objectFit="contain"
+                    style={{ width: "100%", height: "unset" }}
                   />
                 </div>
               </a>
@@ -61,8 +63,8 @@ export default function Projects() {
               </a>
             </div>
             <div className={styles.project}>
-              <Link href="/projects/arduino" className={styles.projectsHeading}>
-                Arduino
+              <Link href="/projects/cpp" className={styles.projectsHeading}>
+                C++
               </Link>
             </div>
           </div>
