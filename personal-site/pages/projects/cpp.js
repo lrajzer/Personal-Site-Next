@@ -1,9 +1,9 @@
 import Layout from "../../components/Layout";
 
-export default function Arduino() {
+export default function Cpp() {
   return (
     <Layout>
-      <h1>Arduino Projects</h1>
+      <h1>C++ Projects</h1>
     </Layout>
   );
 }
