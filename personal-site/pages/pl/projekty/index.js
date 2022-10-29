@@ -1,6 +1,8 @@
 import Layout from "../../../components/Layout";
 import styles from "../../../styles/Projects.module.css";
 import Link from "next/link";
+import Image from "next/image";
+import pythonSolver from "../../../public/imgs/solver.png";
 
 export default function Projects() {
   return (
@@ -16,12 +18,29 @@ export default function Projects() {
         <section className={styles.projectsTable}>
           <div className={styles.row}>
             <div className={styles.project}>
-              <Link
-                href="/pl/projekty/python"
-                className={styles.projectsHeading}
-              >
+              <Link href="/projects/python" className={styles.projectsHeading}>
                 Python
               </Link>
+              <a
+                href="https://github.com/MichalRajzer/Sudoku-Solver"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <h2 className={styles.projectTitle}>Sudoku solver</h2>
+                <p className={styles.projectDescription}>
+                  This was a simple recursive backtracking solver that I tried
+                  to speedrun, without touching Python for more or less half a
+                  year.
+                </p>
+                <div className={styles.projImgWrapper}>
+                  <Image
+                    src={pythonSolver}
+                    alt="Image of a sudoku solver in Python."
+                    layout="fill"
+                    style={{ width: "100%", height: "unset" }}
+                  />
+                </div>
+              </a>
             </div>
             <div className={styles.project}>
               <Link
@@ -30,29 +49,21 @@ export default function Projects() {
               >
                 Javascript
               </Link>
-              <a
-                href="https://mypronouns.tech"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <h2 className={styles.projectTitle}>MyPronouns.Tech</h2>
+              <a href="https://ttfonte.com/" target="_blank" rel="noreferrer">
+                <h2 className={styles.projectTitle}>TTFonte.com</h2>
                 <p className={styles.projectDescription}>
-                  Prosta strona i API które mają na celu ułatwić ludziom
-                  używanie odpowiednich zaimków.
+                  Prosta strona stworzona w Next.js w ramach mojej pracy.
                 </p>
                 <embed
                   type="text/html"
-                  src="https://mypronouns.tech"
+                  src="https://ttfonte.com/"
                   className={styles.embededMPT}
                 />
               </a>
             </div>
             <div className={styles.project}>
-              <Link
-                href="/pl/projekty/arduino"
-                className={styles.projectsHeading}
-              >
-                Arduino
+              <Link href="/pl/projekty/cpp" className={styles.projectsHeading}>
+                C++
               </Link>
             </div>
           </div>
