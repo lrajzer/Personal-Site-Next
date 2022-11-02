@@ -62,11 +62,11 @@ export default function Projects() {
                 />
               </a>
             </div>
-            <div className={styles.project}>
+            {/* <div className={styles.project}>
               <Link href="/projects/cpp" className={styles.projectsHeading}>
                 C++
               </Link>
-            </div>
+            </div> */}
           </div>
         </section>
       </div>
