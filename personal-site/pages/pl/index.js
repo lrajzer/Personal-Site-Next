@@ -30,18 +30,21 @@ export default function Home() {
           <h2 className={styles.headTwo}>Kilka słów o mnie.</h2>
           <p>
             W chwili obecnej studiuję na kierunku Informatics Politechniki
-            Śląskiej. W liceum brałem udział w programie IB, wybrałem wtedy
-            rozszerzenia z fizyki, informatyki i matematyki. Moja przygoda z
-            programowaniem zaczęła się, gdy mój tata pokazał mi Arduino. Od tego
-            czasu przeszedłem w stronę webdev, ale nadal tworzę projekty
-            związane z IOT i robotyką.
+            Śląskiej, ponieważ jedynie ćwiczenia i laboratoria są obowiązkowe,
+            bez problemu mogę pracować na pełnym etacie. W liceum brałem udział
+            w programie IB, wybrałem wtedy rozszerzenia z fizyki, informatyki i
+            matematyki. Moja przygoda z programowaniem zaczęła się, gdy mój tata
+            pokazał mi Arduino. Od tego czasu przeszedłem w stronę webdev, ale
+            nadal tworzę projekty związane z IOT i robotyką.
           </p>
         </div>
         <div className={`${styles.spacer} ${styles.spacerTwo}`}></div>
         <div>
           <div className={`${styles.textBlock} ${styles.textTwo}`}>
             <table className={styles.tableList}>
-              <caption className={styles.tableCaption}>Moje umiejętności:</caption>
+              <caption className={styles.tableCaption}>
+                Moje umiejętności:
+              </caption>
               <tbody>
                 <tr className={styles.tableRow}>
                   <td className={styles.tableItem}>Python 3</td>
