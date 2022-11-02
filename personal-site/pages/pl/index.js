@@ -14,7 +14,7 @@ export default function Home() {
         <div className={styles.nameHeader}>
           <div style={{ padding: 0, margin: 0 }}>
             <h1>Hej!</h1>
-            <h1>Jestem Michał</h1>
+            <h1>Jestem Michał,</h1>
             <h1>Jestem developerem fullstack!</h1>
           </div>
         </div>
@@ -90,13 +90,13 @@ export default function Home() {
                 </tr>
                 <tr className={styles.tableRow} style={{ textAlign: "center" }}>
                   <td className={styles.tableItem}>
+                    {isVisible ? <CountUpAnimation>12</CountUpAnimation> : ""}
+                  </td>
+                  <td className={styles.tableItem}>
                     {isVisible ? <CountUpAnimation>5</CountUpAnimation> : ""}
                   </td>
                   <td className={styles.tableItem}>
-                    {isVisible ? <CountUpAnimation>4</CountUpAnimation> : ""}
-                  </td>
-                  <td className={styles.tableItem}>
-                    {isVisible ? <CountUpAnimation>12</CountUpAnimation> : ""}
+                    {isVisible ? <CountUpAnimation>10</CountUpAnimation> : ""}
                   </td>
                 </tr>
               </tbody>
