@@ -30,8 +30,8 @@ export default function Home() {
           <h2 className={styles.headTwo}>A few words about me.</h2>
           <p>
             Right now I&apos;m attending Computer Science undergraduate studies
-            at the Silesian University of Technology. Rest assured, I'm fully
-            capable of working full time as only labs and exercises are
+            at the Silesian University of Technology. Rest assured, I&apos;m
+            fully capable of working full time as only labs and exercises are
             mandatory. In highschool I took part in the IB Programme where I
             took higher level computer science, physics and maths courses. I
             started my adventure with programming at 12 when my father
