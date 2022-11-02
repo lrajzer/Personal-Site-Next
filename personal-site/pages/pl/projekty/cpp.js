@@ -1,7 +1,7 @@
 import Layout from "../../../components/Layout";
 import { useEffect } from "react";
 
-export default function cpp() {
+export default function Cpp() {
   useEffect(() => alert("Ta część strony jest nadal niedokończona!"));
   return (
     <Layout pl={true}>
