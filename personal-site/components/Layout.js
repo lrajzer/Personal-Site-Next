@@ -14,7 +14,7 @@ export default function Layout({
   isMonoLang,
 }) {
   const { asPath } = useRouter();
-  console.log(asPath.split("/"));
+  // console.log(asPath.split("/"));
   const altEngPaths = {
     "": "pl",
     blog: `/pl${asPath}`,
@@ -30,7 +30,7 @@ export default function Layout({
     kontakt: "/contact",
     projekty: "/projects",
   };
-  console.log(asPath);
+  // console.log(asPath);
   return (
     <>
       <Head>
@@ -96,7 +96,7 @@ export default function Layout({
       <main>
         <Navbar inBrackets={inBrackets} pl={pl} />
         <div className={styles.content}>{children}</div>
-        <Footer pl={pl}/>
+        <Footer pl={pl} />
       </main>
     </>
   );

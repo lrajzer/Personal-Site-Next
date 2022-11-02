@@ -6,9 +6,9 @@ import BlogPost from "../../components/db/models/BlogPost";
 
 export async function getServerSideProps() {
   await connectDB();
-  const blogs = await BlogPost.find({ lang: "eng" } ).limit(5);
+  const blogs = await BlogPost.find({ lang: "eng" }).limit(5);
   const blogsSanitized = new Array();
-  console.log(blogs.join())
+  // console.log(blogs.join())
   blogs.forEach((blog) =>
     blogsSanitized.push({
       uid: blog.uid,
@@ -21,7 +21,7 @@ export async function getServerSideProps() {
       lang: "en",
     })
   );
-  console.log(blogsSanitized);
+  // console.log(blogsSanitized);
   return { props: { blogs: blogsSanitized } };
 }
 

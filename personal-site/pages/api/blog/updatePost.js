@@ -9,7 +9,7 @@ import BlogPost from "../../../components/db/models/BlogPost.js";
 
 export default withApiAuthRequired(async function addPost(req, res) {
   const { uid, title, content, imgSrc, imgAlt, tag } = req.query;
-  console.log(req.query);
+  // console.log(req.query);
   const { user } = getSession(req, res);
   // console.log(user);
   if (user.sub !== process.env.ADMINSUB) {
@@ -35,7 +35,7 @@ export default withApiAuthRequired(async function addPost(req, res) {
     coverImageAlt: imgAlt ? imgAlt : null,
     type: tag ? tag : null,
   });
-  console.log(upRes);
+  // console.log(upRes);
   res.status(200).redirect("/");
   return 0;
 });

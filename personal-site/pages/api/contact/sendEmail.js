@@ -12,7 +12,7 @@ async function sendEmail(req, res) {
     subject ? "" : errors.missing.push("the subject");
     type ? "" : errors.missing.push("the reason why You'd like to contact me");
     content ? "" : errors.missing.push("Your message");
-    console.log(errors);
+    // console.log(errors);
     if (errors.missing.length > 0) {
       return res.status(400).json({ errors: errors.missing.join(", ") });
     }
@@ -43,7 +43,7 @@ async function sendEmail(req, res) {
         ${TagRemover(content)}`,
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return res.status(500).json({ error: error.message });
     }
 
