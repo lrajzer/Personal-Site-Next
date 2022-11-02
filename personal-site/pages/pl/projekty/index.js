@@ -18,7 +18,10 @@ export default function Projects() {
         <section className={styles.projectsTable}>
           <div className={styles.row}>
             <div className={styles.project}>
-              <Link href="/projects/python" className={styles.projectsHeading}>
+              <Link
+                href="/pl/projekty/python"
+                className={styles.projectsHeading}
+              >
                 Python
               </Link>
               <a
@@ -28,9 +31,8 @@ export default function Projects() {
               >
                 <h2 className={styles.projectTitle}>Sudoku solver</h2>
                 <p className={styles.projectDescription}>
-                  This was a simple recursive backtracking solver that I tried
-                  to speedrun, without touching Python for more or less half a
-                  year.
+                  Prosty program do rozwiązywania sudoku z użyciem algorytmu z
+                  backtrackingiem. Stworzyłem go jako swoisty speedrun.
                 </p>
                 <div className={styles.projImgWrapper}>
                   <Image
