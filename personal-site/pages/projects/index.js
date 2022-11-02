@@ -29,8 +29,7 @@ export default function Projects() {
                 <h2 className={styles.projectTitle}>Sudoku solver</h2>
                 <p className={styles.projectDescription}>
                   This was a simple recursive backtracking solver that I tried
-                  to speedrun, without touching Python for more or less half a
-                  year.
+                  to speedrun.
                 </p>
                 <div className={styles.projImgWrapper}>
                   <Image
