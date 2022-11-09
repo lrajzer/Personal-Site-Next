@@ -8,7 +8,7 @@ export default function Hidden() {
       <div>
         <h1>Welcome to a secret part of my website.</h1>
         <p>
-          Here I have several of my side-projects that don't require whole
+          Here I have several of my side-projects that don&apos;t require whole
           separate websites for themselves.
         </p>
       </div>
