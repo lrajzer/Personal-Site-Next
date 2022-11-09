@@ -40,6 +40,9 @@ export default function Footer({ pl }) {
         >
           {pl ? "Projekty" : "Projects"}
         </Link>
+        <Link href="/hidden" className={`${styles.link}`}>
+          {pl ? "Tajne" : "Top Secret"}
+        </Link>
       </div>
     </footer>
   );
