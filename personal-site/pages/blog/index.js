@@ -6,7 +6,7 @@ import BlogPost from "../../components/db/models/BlogPost";
 
 export async function getServerSideProps() {
   await connectDB();
-  const blogs = await BlogPost.find({ lang: "eng" }).limit(5);
+  const blogs = await BlogPost.find({ lang: "eng" });
   // const blogs = [
   //   {
   //     uid: 0,
@@ -29,8 +29,20 @@ export async function getServerSideProps() {
       lang: "en",
     })
   );
-  // console.log(blogsSanitized);
-  return { props: { blogs: blogsSanitized } };
+
+  blogsSanitized.sort((a, b) => {
+    return new Date(a.dateCreated) < new Date(b.dateCreated)
+      ? 1
+      : new Date(a.dateCreated) > new Date(b.dateCreated)
+      ? -1
+      : 0;
+  });
+
+  return {
+    props: {
+      blogs: blogsSanitized,
+    },
+  };
 }
 
 export default function Home({ blogs }) {
