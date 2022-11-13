@@ -10,9 +10,9 @@ export default function Form({ blog, type, preview }) {
   const handlePreview = async (e) => {
     e.preventDefault();
     setBlogProcessed(md().render(blogText));
-    console.log(blogProcessed);
+    // console.log(blogProcessed);
   };
-  console.log(blogProcessed);
+  // console.log(blogProcessed);
   return (
     <form
       action={type === "edit" ? "/api/blog/updatePost" : "/api/blog/createPost"}
