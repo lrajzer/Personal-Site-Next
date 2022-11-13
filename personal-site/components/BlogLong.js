@@ -47,6 +47,7 @@ export default function BlogLong({ blog }) {
         </div>
       </div>
       <div
+        className={Styles.blogWrapper}
         dangerouslySetInnerHTML={{ __html: md().render(blog.content) }}
       ></div>
     </div>

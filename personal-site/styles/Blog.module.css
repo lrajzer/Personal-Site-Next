@@ -8,6 +8,16 @@
   padding: 2vh 2vw 2vh 2vw;
 }
 
+.blogWrapper > pre {
+  padding: 10px;
+  border-style: solid;
+  border-radius: 10px;
+  background-color: #222;
+  border-color: #444;
+  min-width: 40vw;
+  width: fit-content;
+}
+
 @media screen and (max-width: 768px) {
   .BlogFull {
     min-height: 84vh;
