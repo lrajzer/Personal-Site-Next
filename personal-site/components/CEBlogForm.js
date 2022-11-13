@@ -1,18 +1,15 @@
 import Styles from "../styles/CEBlog.module.css";
 import { useState } from "react";
-import { remark } from "remark";
-import html from "remark-html";
+import md from "markdown-it";
 
 export default function Form({ blog, type, preview }) {
   const thisBlog = blog ? blog : undefined;
   const [blogText, setBlogText] = useState("");
-  const [blogProcessed, setBlogProcessed] = useState(
-    remark().use(html).process("Preview")
-  );
+  const [blogProcessed, setBlogProcessed] = useState(md().render(blogText));
 
   const handlePreview = async (e) => {
     e.preventDefault();
-    setBlogProcessed(await remark().use(html).process(blogText));
+    setBlogProcessed(md().render(blogText));
     console.log(blogProcessed);
   };
   console.log(blogProcessed);
@@ -110,7 +107,7 @@ export default function Form({ blog, type, preview }) {
       </button>
       <div
         style={{ textAlign: "justify" }}
-        dangerouslySetInnerHTML={{ __html: blogProcessed.value }}
+        dangerouslySetInnerHTML={{ __html: blogProcessed }}
       />
     </form>
   );
