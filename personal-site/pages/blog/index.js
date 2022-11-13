@@ -7,16 +7,7 @@ import BlogPost from "../../components/db/models/BlogPost";
 export async function getServerSideProps() {
   await connectDB();
   const blogs = await BlogPost.find({ lang: "eng" });
-  // const blogs = [
-  //   {
-  //     uid: 0,
-  //     title: "AAAAAAAAAAAAAAAAAA",
-  //     dateCreated: new Date(),
-  //     content: "AAAAAAAAAA",
-  //   },
-  // ];
   const blogsSanitized = new Array();
-  // console.log(blogs.join())
   blogs.forEach((blog) =>
     blogsSanitized.push({
       uid: blog.uid,
@@ -24,8 +15,8 @@ export async function getServerSideProps() {
       dateCreated: blog.dateCreated.toISOString(),
       content: blog.content,
       dateModified: blog.dateModified ? blog.dateModified.toISOString() : null,
-      coverImageURL: blog.coverImageURL ? blog.coverImageURL : null, //"https://i.imgur.com/m0SctLi.jpeg"
-      coverImageAlt: blog.coverImageAlt ? blog.coverImageAlt : null, //"Swimmy cat"
+      coverImageURL: blog.coverImageURL ? blog.coverImageURL : null,
+      coverImageAlt: blog.coverImageAlt ? blog.coverImageAlt : null,
       lang: "en",
     })
   );
