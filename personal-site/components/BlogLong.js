@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Styles from "../styles/Blog.module.css";
+import md from "markdown-it";
 
 export default function BlogLong({ blog }) {
   // console.log(blog);
@@ -45,7 +46,9 @@ export default function BlogLong({ blog }) {
           )}
         </div>
       </div>
-      <div dangerouslySetInnerHTML={{ __html: blog.content }}></div>
+      <div
+        dangerouslySetInnerHTML={{ __html: md().render(blog.content) }}
+      ></div>
     </div>
   );
   /* '__html: product.description' is unsafe but the data in there shouldn't 

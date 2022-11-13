@@ -3,14 +3,19 @@
 import Link from "next/link";
 import styles from "../styles/Blogs.module.css";
 import TagRemover from "../utils/TagRemover";
+import md from "markdown-it";
 
 export default function BlogShort(props) {
-  let maxLength = 303;
-  if (props.maxLength !== undefined) {
-    maxLength = props.maxLength;
-  }
-
+  const maxLength = props.maxLength !== undefined ? props.maxLength : 303;
   const thisBlog = props.blog;
+
+  let content = thisBlog.content;
+  content = TagRemover(md().render(content));
+  content =
+    content.length >= maxLength
+      ? content.slice(0, maxLength - 3) + "..."
+      : content;
+
   const image =
     thisBlog.coverImageURL !== null ? (
       <img
@@ -25,12 +30,6 @@ export default function BlogShort(props) {
     thisBlog.dateModified !== null
       ? new Date(thisBlog.dateModified)
       : new Date(thisBlog.dateCreated);
-
-  let shortDesc = TagRemover(thisBlog.content);
-
-  if (shortDesc.length > maxLength) {
-    shortDesc = shortDesc.slice(0, maxLength - 3) + "...";
-  }
 
   return (
     <li className={styles.BlogLi}>
@@ -58,7 +57,7 @@ export default function BlogShort(props) {
           </div>
         </div>
         <p className={styles.Description}>
-          <Link href={`/blog/${thisBlog.uid}`}>{shortDesc}</Link>
+          <Link href={`/blog/${thisBlog.uid}`}>{content}</Link>
         </p>
       </div>
     </li>
