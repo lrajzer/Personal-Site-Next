@@ -7,6 +7,14 @@ import BlogPost from "../../components/db/models/BlogPost";
 export async function getServerSideProps() {
   await connectDB();
   const blogs = await BlogPost.find({ lang: "eng" }).limit(5);
+  // const blogs = [
+  //   {
+  //     uid: 0,
+  //     title: "AAAAAAAAAAAAAAAAAA",
+  //     dateCreated: new Date(),
+  //     content: "AAAAAAAAAA",
+  //   },
+  // ];
   const blogsSanitized = new Array();
   // console.log(blogs.join())
   blogs.forEach((blog) =>
