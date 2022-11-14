@@ -1,8 +1,17 @@
 import Styles from "../styles/CEBlog.module.css";
+import { useState } from "react";
+import md from "markdown-it";
+import BlogLong from "./BlogLong.js";
 
-export default function Form({blog, type}) {
-    const thisBlog = blog?blog:undefined;
-    return (
+export default function Form({ blog, type, preview }) {
+  const thisBlog = blog ? blog : undefined;
+  const [blogText, setBlogText] = useState("");
+  const [blogTitle, setBlogTitle] = useState("");
+  const [coverImgUrl, setCoverImgUrl] = useState(null);
+  const [lang, setLang] = useState("en");
+
+  return (
+    <div>
       <form
         action={
           type === "edit" ? "/api/blog/updatePost" : "/api/blog/createPost"
@@ -17,6 +26,9 @@ export default function Form({blog, type}) {
           required
           defaultValue={thisBlog ? thisBlog.title : ""}
           placeholder="Title"
+          onChange={(e) => {
+            setBlogTitle(e.target.value);
+          }}
         />
         <label htmlFor="uid">uid</label>
         {thisBlog ? (
@@ -63,6 +75,9 @@ export default function Form({blog, type}) {
           required
           defaultValue={thisBlog ? thisBlog.content : ""}
           placeholder="Content of the blog, can use HTML"
+          onChange={(e) => {
+            setBlogText(e.target.value);
+          }}
         />
         <label htmlFor="imgSrc">Cover image URL</label>
         <input
@@ -71,6 +86,9 @@ export default function Form({blog, type}) {
           id="imgSrc"
           defaultValue={thisBlog ? thisBlog.coverImageURL : ""}
           placeholder="Cover image URL"
+          onChange={(e) => {
+            setCoverImgUrl(e.target.value);
+          }}
         />
         <label htmlFor="imgAlt">Cover image alternative text</label>
         <input
@@ -81,12 +99,31 @@ export default function Form({blog, type}) {
           placeholder="Alt text for the cover image."
         />
         <div>
-          <label htmlFor="lang" style={{paddingRight: 25}}>Blog is in Polish?</label>
-          <input type="checkbox" name="lang" id="lang" />
+          <label htmlFor="lang" style={{ paddingRight: 25 }}>
+            Blog is in Polish?
+          </label>
+          <input
+            type="checkbox"
+            name="lang"
+            id="lang"
+            onChange={(e) => {
+              setLang(lang === "en" ? "pl" : "en");
+            }}
+          />
         </div>
         <button type="submit" className={Styles.Submit}>
           Submit
         </button>
       </form>
-    );
+      <BlogLong
+        blog={{
+          dateCreated: new Date(),
+          content: blogText,
+          title: blogTitle,
+          coverImageURL: coverImgUrl,
+          lang: lang,
+        }}
+      />
+    </div>
+  );
 }
