@@ -7,6 +7,9 @@
   );
   padding: 2vh 2vw 2vh 2vw;
 }
+.blogWrapper {
+  text-align: justify;
+}
 
 .blogWrapper > pre {
   padding: 10px;
@@ -16,6 +19,13 @@
   border-color: #444;
   min-width: 40vw;
   width: fit-content;
+}
+.blogWrapper > pre > code {
+  white-space: pre-wrap; /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 
 @media screen and (max-width: 768px) {
@@ -46,7 +56,7 @@
 
 @media screen and (min-width: 1500px) {
   .BlogFull {
-    min-height: 84vh;
+    min-height: 82vh;
   }
   .BlogHeader {
     display: flex;
