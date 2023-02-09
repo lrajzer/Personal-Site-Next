@@ -8,7 +8,12 @@ export default function Footer({ pl }) {
         {/* <Link href="">
           <a className={styles.link}>Resume</a>
         </Link> */}
-        <a className={styles.link} href="/docs/CV_def.pdf">
+        <a
+          className={styles.link}
+          href={
+            "/docs/" + (pl ? "MichałRajzerCVpl.pdf" : "MichalRajzerCVeng.pdf")
+          }
+        >
           CV
         </a>
         <a
