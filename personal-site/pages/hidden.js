@@ -14,9 +14,16 @@ export default function Hidden() {
       </div>
       <div>
         <ul>
-          <li>
+          {/* <li>
             <div>
               <Link href="/hidden/jam-helper"> Gamejam helper</Link>
+            </div>
+          </li> */}
+          <li>
+            <div>
+              <Link href="/hidden/neural-net-visualizer">
+                Neural net visualizer
+              </Link>
             </div>
           </li>
         </ul>

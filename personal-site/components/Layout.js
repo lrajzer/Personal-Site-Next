@@ -12,6 +12,7 @@ export default function Layout({
   inBrackets,
   children,
   isMonoLang,
+  otherLang,
 }) {
   const { asPath } = useRouter();
   // console.log(asPath.split("/"));
@@ -64,6 +65,33 @@ export default function Layout({
       </Head>
       {isMonoLang ? (
         ""
+      ) : otherLang !== undefined ? (
+        <div className={styles.LangSwitch}>
+          <h6>
+            {pl ? (
+              <Link href={otherLang}>Pl</Link>
+            ) : (
+              <Link href={otherLang}>En</Link>
+            )}
+          </h6>
+          <span>
+            {pl ? (
+              <Link
+                href={
+                  altPlPaths[
+                    asPath.split("/")[2] ? asPath.split("/")[2] : "undefined"
+                  ]
+                }
+              >
+                Kliknij tu aby zmienić język
+              </Link>
+            ) : (
+              <Link href={altEngPaths[asPath.split("/")[1]]}>
+                Click here to change the language
+              </Link>
+            )}
+          </span>
+        </div>
       ) : (
         <div className={styles.LangSwitch}>
           <h6>
