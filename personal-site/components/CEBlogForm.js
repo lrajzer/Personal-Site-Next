@@ -9,6 +9,7 @@ export default function Form({ blog, type, preview }) {
   const [blogTitle, setBlogTitle] = useState("");
   const [coverImgUrl, setCoverImgUrl] = useState(null);
   const [lang, setLang] = useState("en");
+  const [draft, setDraft] = useState(false);
 
   return (
     <div>
@@ -108,6 +109,19 @@ export default function Form({ blog, type, preview }) {
             id="lang"
             onChange={(e) => {
               setLang(lang === "en" ? "pl" : "en");
+            }}
+          />
+        </div>
+        <div>
+          <label htmlFor="draft" style={{ paddingRight: 25 }}>
+            Draft?
+          </label>
+          <input
+            type="checkbox"
+            name="draft"
+            id="draft"
+            onChange={(e) => {
+              setDraft(!draft);
             }}
           />
         </div>
