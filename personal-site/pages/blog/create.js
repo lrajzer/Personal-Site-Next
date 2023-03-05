@@ -5,7 +5,7 @@ import Layout from "../../components/Layout";
 
 export default withPageAuthRequired(function CreateBlog({ user }) {
   const router = useRouter();
-  if (user !== process.env.ADMINSUB) {
+  if (user?.sub !== process.env.ADMINSUB) {
     console.log("Unauthorized user: " + user);
     router.push("/api/auth/logout");
     return <></>;
