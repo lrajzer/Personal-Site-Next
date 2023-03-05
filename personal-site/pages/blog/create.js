@@ -13,7 +13,7 @@ export default withPageAuthRequired(function CreateBlog({ user }) {
   }
   return (
     <Layout isMonoLang={true}>
-      <CEBlogForm />
+      <CEBlogForm></CEBlogForm>
     </Layout>
   );
 });
