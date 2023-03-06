@@ -8,7 +8,7 @@ import connectDB from "../../../components/db/connectDB.js";
 import BlogPost from "../../../components/db/models/BlogPost.js";
 
 export default withApiAuthRequired(async function addPost(req, res) {
-  const { uid, title, content, imgSrc, imgAlt, tag, lang } = req.query;
+  const { uid, title, content, imgSrc, imgAlt, tag, lang, draft } = req.query;
   // console.log(req.query);
   const { user } = getSession(req, res);
   // console.log(user);
@@ -39,6 +39,7 @@ export default withApiAuthRequired(async function addPost(req, res) {
       coverImageAlt: imgAlt ? imgAlt : null,
       lang: lang ? "pl" : "eng",
       type: tag ? tag : null,
+      draft: draft ? true : false,
     });
     console.log(newPost);
     res.status(200).redirect("/");

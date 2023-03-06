@@ -16,6 +16,7 @@ const BlogPost = new Schema({
   coverImageAlt: { type: String },
   lang: { type: String },
   type: { type: String }, // Needed for future functionality
+  draft: { type: Boolean },
 });
 
 export default models.BlogPost || model("BlogPost", BlogPost);

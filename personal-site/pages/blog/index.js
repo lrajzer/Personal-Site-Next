@@ -8,18 +8,22 @@ export async function getServerSideProps() {
   await connectDB();
   const blogs = await BlogPost.find({ lang: "eng" });
   const blogsSanitized = new Array();
-  blogs.forEach((blog) =>
-    blogsSanitized.push({
-      uid: blog.uid,
-      title: blog.title,
-      dateCreated: blog.dateCreated.toISOString(),
-      content: blog.content,
-      dateModified: blog.dateModified ? blog.dateModified.toISOString() : null,
-      coverImageURL: blog.coverImageURL ? blog.coverImageURL : null,
-      coverImageAlt: blog.coverImageAlt ? blog.coverImageAlt : null,
-      lang: "en",
-    })
-  );
+  blogs.forEach((blog) => {
+    if (!blog.draft) {
+      blogsSanitized.push({
+        uid: blog.uid,
+        title: blog.title,
+        dateCreated: blog.dateCreated.toISOString(),
+        content: blog.content,
+        dateModified: blog.dateModified
+          ? blog.dateModified.toISOString()
+          : null,
+        coverImageURL: blog.coverImageURL ? blog.coverImageURL : null,
+        coverImageAlt: blog.coverImageAlt ? blog.coverImageAlt : null,
+        lang: "en",
+      });
+    }
+  });
 
   blogsSanitized.sort((a, b) => {
     return new Date(a.dateCreated) < new Date(b.dateCreated)
