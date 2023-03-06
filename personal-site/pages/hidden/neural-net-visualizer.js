@@ -16,18 +16,54 @@ const resizeCanvasToDisplaySize = (canvas) => {
   }
 };
 
-const draw = (canvas, net) => {
-  console.log(net);
-  resizeCanvasToDisplaySize(canvas);
+const drawPoints = (canvas, points) => {
   const ctx = canvas.getContext("2d");
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
   const width = canvas.width;
   const height = canvas.height;
-
-  ctx.fillStyle = "black";
-  ctx.fillRect(0, 0, width, height);
+  const centerX = width / 2;
+  const centerY = height / 2;
   ctx.strokeStyle = "white";
-  ctx.lineWidth = 2;
+  points.forEach((point) => {
+    console.log(point);
+    ctx.fillStyle = point.group == 1 ? "red" : "blue";
+    ctx.beginPath();
+    ctx.arc(centerX + point.x, centerY + point.y, 10, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.stroke();
+  });
+};
+
+const drawAxis = (canvas) => {
+  const ctx = canvas.getContext("2d");
+  const width = canvas.width;
+  const height = canvas.height;
+  const centerX = width / 2;
+  const centerY = height / 2;
+  ctx.strokeStyle = "white";
+  ctx.beginPath();
+  ctx.moveTo(centerX, 0);
+  ctx.lineTo(centerX, height);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(centerX, 0);
+  ctx.lineTo(centerX - 10, 20);
+  ctx.moveTo(centerX, 0);
+  ctx.lineTo(centerX + 10, 20);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(0, centerY);
+  ctx.lineTo(width, centerY);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(width, centerY);
+  ctx.lineTo(width - 20, centerY - 10);
+  ctx.moveTo(width, centerY);
+  ctx.lineTo(width - 20, centerY + 10);
+  ctx.stroke();
+};
+
+const drawNet = (canvas, net) => {
+  const ctx = canvas.getContext("2d");
   let boxWidth = 400;
   let boxHeight = 150;
 
@@ -37,6 +73,10 @@ const draw = (canvas, net) => {
   if (net.numNeurons > 3) {
     boxHeight = net.numNeurons * 50;
   }
+  ctx.fillStyle = "black";
+  ctx.strokeStyle = "white";
+  ctx.fillRect(0, 0, boxWidth, boxHeight);
+  ctx.strokeRect(0, 0, boxWidth, boxHeight);
 
   net.neurons.forEach((neuron) => {
     ctx.strokeStyle = "white";
@@ -92,26 +132,44 @@ const draw = (canvas, net) => {
       }
       ctx.lineWidth = 2;
     }
-
-    net.neurons.forEach((neuron) => {
-      if (!(neuron.isOutput || neuron.isInput)) {
-        ctx.strokeStyle = "white";
-        console.log(neuron);
-        ctx.beginPath();
-        ctx.arc(
-          boxWidth / 2 - net.numLayers * 35 + neuron.layer * 70 - 35,
-          boxHeight / 2 - net.biggestLayer * 25 + neuron.index * 50 + 25,
-          20,
-          0,
-          2 * Math.PI
-        );
-        ctx.fill();
-        ctx.stroke();
-      }
-    });
   });
+  net.neurons.forEach((neuron) => {
+    if (!(neuron.isOutput || neuron.isInput)) {
+      ctx.strokeStyle = "white";
+      console.log(neuron);
+      ctx.beginPath();
+      ctx.arc(
+        boxWidth / 2 - net.numLayers * 35 + neuron.layer * 70 - 35,
+        boxHeight / 2 - net.biggestLayer * 25 + neuron.index * 50 + 25,
+        20,
+        0,
+        2 * Math.PI
+      );
+      ctx.fill();
+      ctx.stroke();
+    }
+  });
+};
 
-  ctx.strokeRect(0, 0, boxWidth, boxHeight);
+const draw = (canvas, net, points, showNet) => {
+  console.log(net);
+  resizeCanvasToDisplaySize(canvas);
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const width = canvas.width;
+  const height = canvas.height;
+
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, width, height);
+  ctx.strokeStyle = "white";
+  ctx.lineWidth = 2;
+  console.log(points);
+  drawPoints(canvas, points);
+  drawAxis(canvas);
+  console.log(showNet);
+  if (showNet) {
+    drawNet(canvas, net);
+  }
 };
 
 class Neuron {
@@ -141,6 +199,17 @@ class Point {
     this.group = group;
   }
 }
+
+const generatePoints = (numPoints, numGroups, height, width) => {
+  let points = [];
+  for (let i = 0; i < numPoints; i++) {
+    let x = Math.random() * width - width / 2;
+    let y = Math.random() * height - height / 2;
+    let group = Math.floor(Math.random() * numGroups);
+    points.push(new Point(x, y, group));
+  }
+  return points;
+};
 
 class NeuralNet {
   constructor(neurons) {
@@ -185,8 +254,8 @@ class NeuralNet {
 }
 
 export default function NeuralNetVisualizer() {
-  var [actFunc, setActFunc] = useState("linear");
-  var [net, setNet] = useState(
+  const [actFunc, setActFunc] = useState("linear");
+  const [net, setNet] = useState(
     new NeuralNet([
       new Neuron(false, true, 0, -2, { 0: 0.5, 1: 0.5 }),
       new Neuron(false, false, 0, 1, { 0: 0.25, 1: 0.75 }),
@@ -197,17 +266,33 @@ export default function NeuralNetVisualizer() {
       new Neuron(true, false, 1, -1),
     ])
   );
+  const [points, setPoints] = useState(generatePoints(10, 2, 100, 100));
+  const [showNet, setShowNet] = useState(true);
 
   const canvasRef = useRef();
 
   useEffect(() => {
     window.addEventListener("resize", () => {
       const canvas = canvasRef.current;
-      draw(canvas, net);
+      draw(canvas, net, points, showNet);
     });
     const canvas = canvasRef.current;
-    draw(canvas, net);
+    draw(canvas, net, points, showNet);
   }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    draw(canvas, net, points, showNet);
+  }, [showNet]);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    draw(canvas, net, points, showNet);
+  }, [net]);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    draw(canvas, net, points, showNet);
+  }, [points]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -218,6 +303,18 @@ export default function NeuralNetVisualizer() {
         <div className={styles.topBar}>
           <form onSubmit={handleSubmit} className={styles.topForm}>
             <div className={styles.formEntry}>
+              <label htmlFor="hideNet">Hide the neural net:</label>
+              <button
+                id="hideNet"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowNet(!showNet);
+                }}
+              >
+                {showNet ? "Hide" : "Show"}
+              </button>
+            </div>
+            <div className={styles.formEntry}>
               <label htmlFor="actFunc">Activation function:</label>
               <select name="actFunc" id="actFunc">
                 <option value="linear">Linear</option>
@@ -227,6 +324,7 @@ export default function NeuralNetVisualizer() {
                 <option value="leakyRelu">Leaky ReLU</option>
               </select>
             </div>
+
             <div className={styles.formEntry}>
               <label htmlFor="numLayers">Number of layers:</label>
               <button
@@ -243,9 +341,34 @@ export default function NeuralNetVisualizer() {
               <label htmlFor="numNeurons">Number of neurons:</label>
               <button id="addNeuron">Add neuron</button>
             </div>
+            <div className={styles.formEntry}>
+              <label htmlFor="pointsGen">Generate random points:</label>
+              <button
+                id="pointsGen"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setPoints(
+                    generatePoints(
+                      10,
+                      2,
+                      canvasRef.current.height,
+                      canvasRef.current.width
+                    )
+                  );
+                }}
+              >
+                Generate points
+              </button>
+            </div>
           </form>
         </div>
-        <canvas ref={canvasRef} className={styles.canvas} width="1" height="1">
+        <canvas
+          ref={canvasRef}
+          className={styles.canvas}
+          width="1"
+          height="1"
+          onClick={(e) => handleCanvasClick(e)}
+        >
           Your browser does not support the canvas element :((
         </canvas>
       </div>
