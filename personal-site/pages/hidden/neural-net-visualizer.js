@@ -172,6 +172,81 @@ const draw = (canvas, net, points, showNet) => {
   }
 };
 
+function linear(inp) {
+  return inp;
+}
+
+function sigmoid(inp) {
+  return 1 / (1 + Math.exp(-inp));
+}
+
+function relu(inp) {
+  return Math.max(0, inp);
+}
+
+const calculateNet = (net, x, y) => {
+  net.layers.forEach((layer) => {
+    layer.forEach((neuron) => {
+      if (neuron.layer == 1) {
+        switch (neuron.activation) {
+          case "linear":
+            neuron.value = linear(
+              neuron.bias + neuron.weights[0] * x + neuron.weights[1] * y
+            );
+            break;
+          case "sigmoid":
+            neuron.value = sigmoid(
+              neuron.bias + neuron.weights[0] * x + neuron.weights[1] * y
+            );
+            break;
+          case "relu":
+            neuron.value = relu(
+              neuron.bias + neuron.weights[0] * x + neuron.weights[1] * y
+            );
+          default:
+            console.log("Unknow activation function error");
+            break;
+        }
+      } else {
+        let sum = 0;
+        net.layers[neuron.layer - 2].forEach((prevNeuron) => {
+          sum += prevNeuron.value * neuron.weights[prevNeuron.index];
+        });
+        switch (neuron.activation) {
+          case "linear":
+            neuron.value = linear(sum + neuron.bias);
+            break;
+          case "sigmoid":
+            neuron.value = sigmoid(sum + neuron.bias);
+            break;
+          case "relu":
+            neuron.value = relu(sum + neuron.bias);
+            break;
+          default:
+            console.log("Unknow activation function error");
+            break;
+        }
+      }
+    });
+  });
+  let sum = 0;
+  net.layers[net.numLayers - 1].forEach((neuron) => {
+    sum += neuron.value;
+  });
+  switch (net.output.activation) {
+    case "linear":
+      return linear(sum + net.output.bias);
+    case "sigmoid":
+      return sigmoid(sum + net.output.bias);
+    case "relu":
+      return relu(sum + net.output.bias);
+    default:
+      console.log("Unknow activation function error");
+      return 0.5;
+      break;
+  }
+};
+
 class Neuron {
   constructor(
     isInput,
@@ -189,6 +264,7 @@ class Neuron {
     this.weights = weights;
     this.bias = bias;
     this.activation = activation;
+    this.value = 0;
   }
 }
 
@@ -217,6 +293,24 @@ class NeuralNet {
     this.neurons = neurons;
     this.numNeurons = 0;
     this.getLayerNums();
+    this.inputs = [];
+    this.output;
+
+    this.layers = [];
+    for (let i = 0; i < this.numLayers; i++) {
+      this.layers.push([]);
+    }
+
+    this.neurons.forEach((neuron) => {
+      if (neuron.isInput) {
+        this.inputs.push(neuron);
+      } else if (neuron.isOutput) {
+        this.output = neuron;
+      } else {
+        this.layers[neuron.layer - 1].push(neuron);
+      }
+    });
+    console.log(this.layers);
   }
 
   getLayerNums() {
@@ -257,11 +351,11 @@ export default function NeuralNetVisualizer() {
   const [actFunc, setActFunc] = useState("linear");
   const [net, setNet] = useState(
     new NeuralNet([
-      new Neuron(false, true, 0, -2, { 0: 0.5, 1: 0.5 }),
-      new Neuron(false, false, 0, 1, { 0: 0.25, 1: 0.75 }),
-      new Neuron(false, false, 1, 1, { 0: 0.5, 1: 0.3333 }),
-      new Neuron(false, false, 0, 2, { 0: 0.25, 1: 0.75 }),
-      new Neuron(false, false, 1, 2, { 0: 0.5, 1: 0.5 }),
+      new Neuron(false, true, 0, -2, { 0: 0.5, 1: 0.5 }, 0, "linear"),
+      new Neuron(false, false, 0, 1, { 0: 0.25, 1: 0.75 }, 0, "linear"),
+      new Neuron(false, false, 1, 1, { 0: 0.5, 1: 0.3333 }, 0, "linear"),
+      new Neuron(false, false, 0, 2, { 0: 0.25, 1: 0.75 }, 0, "linear"),
+      new Neuron(false, false, 1, 2, { 0: 0.5, 1: 0.5 }, 0, "linear"),
       new Neuron(true, false, 0, -1),
       new Neuron(true, false, 1, -1),
     ])
