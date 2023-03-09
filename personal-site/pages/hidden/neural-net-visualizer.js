@@ -223,6 +223,14 @@ function relu(inp) {
   return Math.max(0, inp);
 }
 
+function tanh(inp) {
+  return Math.tanh(inp);
+}
+
+function leakyRelu(inp) {
+  return Math.max(0.01 * inp, inp);
+}
+
 const calculateNet = (net, x, y) => {
   // console.log("Uga buga ", net);
   net.layers.forEach((layer) => {
@@ -244,6 +252,17 @@ const calculateNet = (net, x, y) => {
               neuron.bias + neuron.weights[0] * x + neuron.weights[1] * y
             );
             break;
+          case "tanh":
+            neuron.value = tanh(
+              neuron.bias + neuron.weights[0] * x + neuron.weights[1] * y
+            );
+            break;
+          case "leakyRelu":
+            neuron.value = leakyRelu(
+              neuron.bias + neuron.weights[0] * x + neuron.weights[1] * y
+            );
+            break;
+
           default:
             console.log("Unknow activation function error");
             break;
@@ -263,6 +282,13 @@ const calculateNet = (net, x, y) => {
           case "relu":
             neuron.value = relu(sum + neuron.bias);
             break;
+          case "tanh":
+            neuron.value = tanh(sum + neuron.bias);
+            break;
+          case "leakyRelu":
+            neuron.value = leakyRelu(sum + neuron.bias);
+            break;
+
           default:
             console.log("Unknow activation function error");
             break;
@@ -315,6 +341,14 @@ class Point {
   }
 }
 
+/**
+ * Generates random points in a 2D space with a given number of groups
+ * @param {int} numPoints Number of points to generate
+ * @param {int} numGroups Number of groups to be generated
+ * @param {int} height Maximum height of the space
+ * @param {int} width Maximum width of the space
+ * @returns {Point[]} Array of points
+ */
 const generatePoints = (numPoints, numGroups, height, width) => {
   let points = [];
   for (let i = 0; i < numPoints; i++) {
