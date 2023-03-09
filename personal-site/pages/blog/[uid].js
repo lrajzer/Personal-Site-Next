@@ -3,6 +3,8 @@ import Layout from "../../components/Layout";
 import BlogLong from "../../components/BlogLong";
 import connectDB from "../../components/db/connectDB";
 import BlogPost from "../../components/db/models/BlogPost";
+import TagRemover from "../../utils/TagRemover";
+import md from "markdown-it";
 
 export async function getServerSideProps(context) {
   const uid = context.query.uid;
@@ -54,8 +56,10 @@ export async function getServerSideProps(context) {
 }
 
 export default function Blog({ blog }) {
+  let content = TagRemover(md().render(blog.content));
+  content = content.length >= 60 ? content.slice(0, 57) + "..." : content;
   return (
-    <Layout isMonoLang={true}>
+    <Layout isMonoLang={true} title={blog.title} description={content}>
       <BlogLong blog={blog} />
     </Layout>
   );
