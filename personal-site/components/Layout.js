@@ -36,6 +36,7 @@ export default function Layout({
     <>
       <Head>
         <title>{title ? title : "Michal Rajzer"}</title>
+        <meta property="og:title" content={title ? title : "Michal Rajzer"} />
         <meta
           name="description"
           content={
@@ -43,6 +44,31 @@ export default function Layout({
               ? description
               : "Michal Rajzer's site, created using NextJs and MongoDB"
           }
+          key="desc"
+        />
+        <meta
+          name="og:description"
+          content={
+            description
+              ? description
+              : "Michal Rajzer's site, created using NextJs and MongoDB"
+          }
+          key="desc"
+        />
+        <meta property="og:locale" content={pl ? "pl_PL" : "en_GB"} />
+        {isMonoLang ? (
+          ""
+        ) : (
+          <meta
+            property="og:locale:alternate"
+            content={pl ? "en_GB" : "pl_PL"}
+          />
+        )}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://michalrajzer.com" />
+        <meta
+          property="og:site_name"
+          content="Michal Rajzer's personal website"
         />
         <link
           rel="apple-touch-icon"
