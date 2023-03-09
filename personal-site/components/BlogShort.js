@@ -6,7 +6,7 @@ import TagRemover from "../utils/TagRemover";
 import md from "markdown-it";
 
 export default function BlogShort({ maxLength, blog }) {
-  const maxLength = maxLength !== undefined ? maxLength : 303;
+  maxLength = maxLength !== undefined ? maxLength : 303;
   const thisBlog = blog;
 
   let content = thisBlog.content;
