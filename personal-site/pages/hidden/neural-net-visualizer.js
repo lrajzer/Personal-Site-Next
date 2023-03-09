@@ -456,7 +456,11 @@ export default function NeuralNetVisualizer() {
     e.preventDefault();
   };
   return (
-    <Layout title="Neural net visualizer" isMonoLang={true}>
+    <Layout
+      title="Neural net visualizer"
+      description="Neural net visualizer made entirely in Javascript."
+      isMonoLang={true}
+    >
       <div className={styles.content}>
         <h1>Neural net visualizer</h1>
         <div className={styles.topBar}>

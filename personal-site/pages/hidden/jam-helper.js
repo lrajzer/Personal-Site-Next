@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Hidden() {
   return (
     <Layout title="Gamejam helper" isMonoLang={true}>
-      <h1>Gamejam helper</h1>
+      <h1>WIP</h1>
     </Layout>
   );
 }
