@@ -18,7 +18,11 @@ export default function Hidden() {
   };
 
   return (
-    <Layout title="Gamejam helper" isMonoLang={true}>
+    <Layout
+      title="Gamejam helper"
+      isMonoLang={true}
+      description="A small ad-libber for use in gamejams"
+    >
       <div className={styles.content}>
         <h1 className={styles.heading}>Gamejam helper</h1>
         <p className={styles.desc}>
