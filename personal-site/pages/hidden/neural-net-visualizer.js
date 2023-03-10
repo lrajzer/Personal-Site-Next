@@ -24,7 +24,7 @@ const drawPoints = (canvas, points) => {
   const centerY = height / 2;
   ctx.strokeStyle = "white";
   points.forEach((point) => {
-    console.log(point);
+    // console.log(point);
     ctx.fillStyle = point.group == 1 ? "red" : "blue";
     ctx.beginPath();
     ctx.arc(centerX + point.x, centerY + point.y, 10, 0, 2 * Math.PI);
@@ -62,18 +62,24 @@ const drawAxis = (canvas) => {
   ctx.stroke();
 };
 
-const drawNet = (canvas, net) => {
-  const ctx = canvas.getContext("2d");
+const calcBox = (net) => {
   let boxWidth = 400;
   let boxHeight = 150;
 
   if (net.numLayers > 3) {
     boxWidth = net.numLayers * 100;
   }
-  if (net.numNeurons > 3) {
-    boxHeight = net.numNeurons * 50;
+  if (net.biggestLayer > 3) {
+    boxHeight = net.biggestLayer * 50;
   }
-  ctx.fillStyle = "rgba(0, 0, 0, 1)";
+  return { boxWidth, boxHeight };
+};
+
+const drawNet = (canvas, net) => {
+  const ctx = canvas.getContext("2d");
+  const { boxWidth, boxHeight } = calcBox(net);
+
+  ctx.fillStyle = "rgba(0, 0, 0, 255)";
   ctx.fillRect(0, 0, boxWidth, boxHeight);
   ctx.strokeStyle = "white";
   ctx.strokeRect(0, 0, boxWidth, boxHeight);
@@ -125,7 +131,7 @@ const drawNet = (canvas, net) => {
           );
           ctx.stroke();
         } else if (neuron.layer <= 1) {
-          console.log(id, (boxHeight + id * boxHeight) / 3); // I hate js
+          // console.log(id, (boxHeight + id * boxHeight) / 3); // I hate js
           ctx.lineTo(50, (boxHeight + id * boxHeight) / 3); // (boxHeight*(id + 1)) / 3 != (boxHeight + id * boxHeight) / 3
           ctx.stroke();
         }
@@ -136,7 +142,7 @@ const drawNet = (canvas, net) => {
   net.neurons.forEach((neuron) => {
     if (!(neuron.isOutput || neuron.isInput)) {
       ctx.strokeStyle = "white";
-      console.log(neuron);
+      // console.log(neuron);
       ctx.beginPath();
       ctx.arc(
         boxWidth / 2 - net.numLayers * 35 + neuron.layer * 70 - 35,
@@ -205,7 +211,7 @@ const draw = (canvas, net, points, showNet) => {
   // console.log(points);
   drawPoints(canvas, points);
   drawAxis(canvas);
-  console.log(showNet);
+  // console.log(showNet);
   if (showNet) {
     drawNet(canvas, net);
   }
@@ -360,8 +366,56 @@ const generatePoints = (numPoints, numGroups, height, width) => {
   return points;
 };
 
-const handleCanvasClick = (e) => {
-  console.log("click");
+/**
+ * Converts left top corner coords to axis coords
+ * @param {*} x
+ * @param {*} y
+ */
+const getAxisCords = (x, y, height, width) => {
+  let newX = x - width / 2;
+  let newY = y - height / 2;
+
+  return { newX, newY };
+};
+
+const handleCanvasClick = (
+  canvas,
+  e,
+  showNet,
+  net,
+  setNet,
+  points,
+  setPoints
+) => {
+  const rect = canvas.current.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  console.log(`Clicked on x: ${x}, y: ${y}`);
+  if (showNet) {
+    const netBox = calcBox(net);
+    if (x < netBox["boxWidth"] && y < netBox["boxHeight"]) {
+      return;
+    }
+  }
+  const { newX, newY } = getAxisCords(
+    x,
+    y,
+    canvas.current.height,
+    canvas.current.width
+  );
+  let inserted = false;
+  points.forEach((point, idx) => {
+    console.log(point, idx);
+    if (
+      Math.abs(point.x - newX) * Math.abs(point.x - newX) +
+        Math.abs(point.y - newY) * Math.abs(point.y - newY) <
+      100
+    ) {
+      console.log("Removing point");
+      setPoints(points.filter((_, i) => i !== idx));
+    }
+  });
+  setPoints([...points, new Point(newX, newY, 0)]);
 };
 
 class NeuralNet {
@@ -387,7 +441,6 @@ class NeuralNet {
         this.layers[neuron.layer - 1].push(neuron);
       }
     });
-    console.log(this.layers);
   }
 
   getLayerNums() {
@@ -405,11 +458,15 @@ class NeuralNet {
     this.numLayers = Object.keys(layers).length;
     //iterate through layers and find the biggest layer
     for (let layer in layers) {
+      // console.log(layers[layer]);
       if (layers[layer] > this.biggestLayer) {
         this.biggestLayer = layers[layer];
       }
     }
-    console.log(layers);
+
+    // console.log(
+    //   `Num layers: ${this.numLayers}, num neurons: ${this.biggestLayer}`
+    // );
   }
 
   addLayer() {
@@ -428,9 +485,19 @@ export default function NeuralNetVisualizer() {
   const [actFunc, setActFunc] = useState("linear");
   const [net, setNet] = useState(
     new NeuralNet([
-      new Neuron(false, true, 0, -2, { 0: 1, 1: 1 }, 0, "linear"),
+      new Neuron(
+        false,
+        true,
+        0,
+        -2,
+        { 0: 1, 1: 1, 2: 0, 3: 0 },
+        -0.6,
+        "sigmoid"
+      ),
       new Neuron(false, false, 0, 1, { 0: 1, 1: -1 }, 0.5, "sigmoid"),
       new Neuron(false, false, 1, 1, { 0: 1, 1: 0 }, 0, "relu"),
+      new Neuron(false, false, 2, 1, { 0: 1, 1: 0 }, 0, "relu"),
+      new Neuron(false, false, 3, 1, { 0: 1, 1: 0 }, 0, "relu"),
       new Neuron(true, false, 0, -1),
       new Neuron(true, false, 1, -1),
     ])
@@ -441,15 +508,12 @@ export default function NeuralNetVisualizer() {
   const canvasRef = useRef();
 
   useEffect(() => {
+    const canvas = canvasRef.current;
+    draw(canvas, net, points, showNet);
     window.addEventListener("resize", () => {
       const canvas = canvasRef.current;
       draw(canvas, net, points, showNet);
     });
-  }, []);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    draw(canvas, net, points, showNet);
   }, [showNet, net, points]);
 
   const handleSubmit = (e) => {
@@ -463,6 +527,7 @@ export default function NeuralNetVisualizer() {
     >
       <div className={styles.content}>
         <h1>Neural net visualizer</h1>
+
         <div className={styles.topBar}>
           <form onSubmit={handleSubmit} className={styles.topForm}>
             <div className={styles.formEntry}>
@@ -530,10 +595,36 @@ export default function NeuralNetVisualizer() {
           className={styles.canvas}
           width="1"
           height="1"
-          onClick={(e) => handleCanvasClick(e)}
+          onClick={(e) =>
+            handleCanvasClick(
+              canvasRef,
+              e,
+              showNet,
+              net,
+              setNet,
+              points,
+              setPoints
+            )
+          }
         >
           Your browser does not support the canvas element :((
         </canvas>
+        <p className={styles.bottomText}>
+          This is a neural net visualizer made entirely in Javascript. It uses
+          the HTML5 canvas element to draw the neural net and the points. The
+          neural net is a simple 2-layer neural net with 2 inputs and 1 output.
+          <br />
+          You can add more layers and neurons to the neural net by clicking the
+          &quot;Add layer&quot; and &quot;Add neuron&quot; buttons.
+          <br />
+          You can also generate random points by clicking the &quot;Generate
+          points&quot; button.
+          <br />
+          You can move neurons to different layers by dragging them, and you can
+          change their weights by clicking on them.
+          <br />
+          You can add and delete points by clicking on them and on the canvas.
+        </p>
       </div>
     </Layout>
   );
