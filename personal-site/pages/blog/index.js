@@ -42,7 +42,10 @@ export async function getServerSideProps() {
 
 export default function Home({ blogs }) {
   return (
-    <Layout>
+    <Layout
+      title="Michał Rajzer's blog"
+      description="Here You can find all of my blogs!"
+    >
       <div className={styles.BlogContent}>
         <h1>Welcome to my Blog</h1>
         <div>

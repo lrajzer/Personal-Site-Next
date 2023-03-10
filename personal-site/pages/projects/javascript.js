@@ -4,7 +4,10 @@ import styles from "../../styles/Projects.module.css";
 
 export default function Javascript() {
   return (
-    <Layout>
+    <Layout
+      title="Javascript projects"
+      description="Check out my Javascript projects!"
+    >
       <h1 className={styles.projectsTitle}>My Javascript Projects</h1>
       <ul className={styles.projectList}>
         <li style={{ marginTop: "5vh", marginBottom: "5vh" }}>

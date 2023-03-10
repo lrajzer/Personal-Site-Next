@@ -73,9 +73,9 @@ const drawNet = (canvas, net) => {
   if (net.numNeurons > 3) {
     boxHeight = net.numNeurons * 50;
   }
-  ctx.fillStyle = "black";
-  ctx.strokeStyle = "white";
+  ctx.fillStyle = "rgba(0, 0, 0, 1)";
   ctx.fillRect(0, 0, boxWidth, boxHeight);
+  ctx.strokeStyle = "white";
   ctx.strokeRect(0, 0, boxWidth, boxHeight);
 
   net.neurons.forEach((neuron) => {
@@ -151,6 +151,45 @@ const drawNet = (canvas, net) => {
   });
 };
 
+const drawNetInfluence = (canvas, net, interpolation) => {
+  const ctx = canvas.getContext("2d");
+  let width = canvas.width;
+  let height = canvas.height;
+  const originalWidth = width;
+  const originalHeight = height;
+
+  if (interpolation !== undefined) {
+    width /= interpolation;
+    height /= interpolation;
+  }
+  const centerX = width / 2;
+  const centerY = height / 2;
+  var imageData = ctx.createImageData(width, height);
+  for (let x = 0; x < width; x++) {
+    for (let y = 0; y < height; y++) {
+      const val = calculateNet(
+        net,
+        (x - centerX) / centerX,
+        (y - centerY) / centerY
+      );
+      if (val > 0.5) {
+        imageData.data[(x + y * width) * 4 + 0] = 0;
+        imageData.data[(x + y * width) * 4 + 1] = 0;
+        imageData.data[(x + y * width) * 4 + 2] = 255;
+        imageData.data[(x + y * width) * 4 + 3] = 32;
+      } else {
+        imageData.data[(x + y * width) * 4 + 0] = 255;
+        imageData.data[(x + y * width) * 4 + 1] = 0;
+        imageData.data[(x + y * width) * 4 + 2] = 0;
+        imageData.data[(x + y * width) * 4 + 3] = 32;
+      }
+    }
+  }
+  createImageBitmap(imageData).then((imageBitmap) => {
+    ctx.drawImage(imageBitmap, 0, 0, originalWidth, originalHeight);
+  });
+};
+
 const draw = (canvas, net, points, showNet) => {
   console.log(net);
   resizeCanvasToDisplaySize(canvas);
@@ -158,17 +197,118 @@ const draw = (canvas, net, points, showNet) => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const width = canvas.width;
   const height = canvas.height;
-
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, width, height);
   ctx.strokeStyle = "white";
   ctx.lineWidth = 2;
-  console.log(points);
+  drawNetInfluence(canvas, net, 1);
+  // console.log(points);
   drawPoints(canvas, points);
   drawAxis(canvas);
   console.log(showNet);
   if (showNet) {
     drawNet(canvas, net);
+  }
+};
+
+function linear(inp) {
+  return inp;
+}
+
+function sigmoid(inp) {
+  return 1 / (1 + Math.exp(-inp));
+}
+
+function relu(inp) {
+  return Math.max(0, inp);
+}
+
+function tanh(inp) {
+  return Math.tanh(inp);
+}
+
+function leakyRelu(inp) {
+  return Math.max(0.01 * inp, inp);
+}
+
+const calculateNet = (net, x, y) => {
+  // console.log("Uga buga ", net);
+  net.layers.forEach((layer) => {
+    layer.forEach((neuron) => {
+      if (neuron.layer == 1) {
+        switch (neuron.activation) {
+          case "linear":
+            neuron.value = linear(
+              neuron.bias + neuron.weights[0] * x + neuron.weights[1] * y
+            );
+            break;
+          case "sigmoid":
+            neuron.value = sigmoid(
+              neuron.bias + neuron.weights[0] * x + neuron.weights[1] * y
+            );
+            break;
+          case "relu":
+            neuron.value = relu(
+              neuron.bias + neuron.weights[0] * x + neuron.weights[1] * y
+            );
+            break;
+          case "tanh":
+            neuron.value = tanh(
+              neuron.bias + neuron.weights[0] * x + neuron.weights[1] * y
+            );
+            break;
+          case "leakyRelu":
+            neuron.value = leakyRelu(
+              neuron.bias + neuron.weights[0] * x + neuron.weights[1] * y
+            );
+            break;
+
+          default:
+            console.log("Unknow activation function error");
+            break;
+        }
+      } else {
+        let sum = 0;
+        net.layers[neuron.layer - 2].forEach((prevNeuron) => {
+          sum += prevNeuron.value * neuron.weights[prevNeuron.index];
+        });
+        switch (neuron.activation) {
+          case "linear":
+            neuron.value = linear(sum + neuron.bias);
+            break;
+          case "sigmoid":
+            neuron.value = sigmoid(sum + neuron.bias);
+            break;
+          case "relu":
+            neuron.value = relu(sum + neuron.bias);
+            break;
+          case "tanh":
+            neuron.value = tanh(sum + neuron.bias);
+            break;
+          case "leakyRelu":
+            neuron.value = leakyRelu(sum + neuron.bias);
+            break;
+
+          default:
+            console.log("Unknow activation function error");
+            break;
+        }
+      }
+    });
+  });
+  let sum = 0;
+  net.layers[net.numLayers - 1].forEach((prevNeuron) => {
+    sum += prevNeuron.value * net.output.weights[prevNeuron.index];
+  });
+  switch (net.output.activation) {
+    case "linear":
+      return linear(sum + net.output.bias);
+    case "sigmoid":
+      return sigmoid(sum + net.output.bias);
+    case "relu":
+      return relu(sum + net.output.bias);
+    default:
+      throw new Error("Unknow activation function error");
   }
 };
 
@@ -189,6 +329,7 @@ class Neuron {
     this.weights = weights;
     this.bias = bias;
     this.activation = activation;
+    this.value = 0;
   }
 }
 
@@ -200,6 +341,14 @@ class Point {
   }
 }
 
+/**
+ * Generates random points in a 2D space with a given number of groups
+ * @param {int} numPoints Number of points to generate
+ * @param {int} numGroups Number of groups to be generated
+ * @param {int} height Maximum height of the space
+ * @param {int} width Maximum width of the space
+ * @returns {Point[]} Array of points
+ */
 const generatePoints = (numPoints, numGroups, height, width) => {
   let points = [];
   for (let i = 0; i < numPoints; i++) {
@@ -211,12 +360,34 @@ const generatePoints = (numPoints, numGroups, height, width) => {
   return points;
 };
 
+const handleCanvasClick = (e) => {
+  console.log("click");
+};
+
 class NeuralNet {
   constructor(neurons) {
     this.biggestLayer = 0; // number of neurons in the biggest layer
     this.neurons = neurons;
     this.numNeurons = 0;
     this.getLayerNums();
+    this.inputs = [];
+    this.output;
+
+    this.layers = [];
+    for (let i = 0; i < this.numLayers; i++) {
+      this.layers.push([]);
+    }
+
+    this.neurons.forEach((neuron) => {
+      if (neuron.isInput) {
+        this.inputs.push(neuron);
+      } else if (neuron.isOutput) {
+        this.output = neuron;
+      } else {
+        this.layers[neuron.layer - 1].push(neuron);
+      }
+    });
+    console.log(this.layers);
   }
 
   getLayerNums() {
@@ -257,11 +428,9 @@ export default function NeuralNetVisualizer() {
   const [actFunc, setActFunc] = useState("linear");
   const [net, setNet] = useState(
     new NeuralNet([
-      new Neuron(false, true, 0, -2, { 0: 0.5, 1: 0.5 }),
-      new Neuron(false, false, 0, 1, { 0: 0.25, 1: 0.75 }),
-      new Neuron(false, false, 1, 1, { 0: 0.5, 1: 0.3333 }),
-      new Neuron(false, false, 0, 2, { 0: 0.25, 1: 0.75 }),
-      new Neuron(false, false, 1, 2, { 0: 0.5, 1: 0.5 }),
+      new Neuron(false, true, 0, -2, { 0: 1, 1: 1 }, 0, "linear"),
+      new Neuron(false, false, 0, 1, { 0: 1, 1: -1 }, 0.5, "sigmoid"),
+      new Neuron(false, false, 1, 1, { 0: 1, 1: 0 }, 0, "relu"),
       new Neuron(true, false, 0, -1),
       new Neuron(true, false, 1, -1),
     ])
@@ -276,28 +445,22 @@ export default function NeuralNetVisualizer() {
       const canvas = canvasRef.current;
       draw(canvas, net, points, showNet);
     });
-    const canvas = canvasRef.current;
-    draw(canvas, net, points, showNet);
   }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     draw(canvas, net, points, showNet);
-  }, [showNet]);
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    draw(canvas, net, points, showNet);
-  }, [net]);
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    draw(canvas, net, points, showNet);
-  }, [points]);
+  }, [showNet, net, points]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
   };
   return (
-    <Layout title="Neural net visualizer" isMonoLang={true}>
+    <Layout
+      title="Neural net visualizer"
+      description="Neural net visualizer made entirely in Javascript."
+      isMonoLang={true}
+    >
       <div className={styles.content}>
         <h1>Neural net visualizer</h1>
         <div className={styles.topBar}>
