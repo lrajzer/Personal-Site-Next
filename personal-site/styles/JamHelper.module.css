@@ -1,0 +1,52 @@
+.content {
+  width: calc(100% - 10vw);
+  padding: 2vh 5vw;
+}
+
+.heading {
+  margin-top: 1vh;
+  margin-bottom: 2vh;
+}
+
+.desc {
+  margin-bottom: 2vh;
+}
+.inForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sentenceIn {
+  width: 80%;
+  margin: 1vh 0;
+  padding: 10px;
+}
+
+.wordInDiv {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  margin: 1vh 0;
+}
+
+.wordIn {
+  width: 50%;
+  padding: 10px;
+  margin: 0 1vw;
+}
+
+.wordButton {
+  width: 20%;
+  padding: 10px;
+  margin: 0 1vw;
+}
+
+.label {
+  padding: 10px;
+}
+
+.groupSelector {
+  padding: 10px;
+}
