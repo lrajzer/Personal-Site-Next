@@ -1,5 +1,5 @@
 .content {
-  width: 90%;
+  width: calc(100% - 10vw);
   padding: 2vh 5vw;
 }
 
@@ -38,12 +38,19 @@
 
 @media screen and (max-width: 768px) {
   .content {
-    height: 84vh;
+    min-height: 84vh;
   }
 }
 
 @media screen and (min-width: 769px) {
   .content {
-    height: 82vh;
+    min-height: 82vh;
   }
+}
+
+.bottomText {
+  text-align: justify;
+  align-items: center;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
 }
