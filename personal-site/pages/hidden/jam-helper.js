@@ -30,7 +30,7 @@ export default function Hidden() {
           filling the gaps with random words from the word base. To use it,
           enter the phrase in the first input box with gaps surrounded with
           brackets, for example: Make a game using {"{mechanic}"} in the theme
-          of {"{theme}"}. Then You can add words to each group. When You're
+          of {"{theme}"}. Then You can add words to each group. When You&apos;re
           done, You can use the button generate to get Your filled out sentence.
         </p>
         <form
