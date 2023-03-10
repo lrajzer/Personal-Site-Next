@@ -19,7 +19,7 @@ const CountUpAnimation = ({ children, duration = 2000 }) => {
         clearInterval(counter);
       }
     }, frameDuration);
-  }, []);
+  }, [countTo, duration]);
 
   return Math.floor(count);
 };

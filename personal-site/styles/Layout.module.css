@@ -21,7 +21,7 @@
 
 @media screen and (max-width: 768px) {
   .content {
-    min-height: 88vh;
+    min-height: 86vh;
   }
   .LangSwitch {
     top: calc(90% - 50px);

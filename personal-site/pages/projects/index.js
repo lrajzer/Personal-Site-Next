@@ -6,7 +6,10 @@ import pythonSolver from "../../public/imgs/solver.png";
 
 export default function Projects() {
   return (
-    <Layout>
+    <Layout
+      title="My projects"
+      description="Check out my projects made in Pyhton, Javascript, and other languages."
+    >
       <div className={styles.mainContent}>
         <h1 className={styles.projectsTitle}>My projects</h1>
         <h2 className={styles.projectsCaption}>

@@ -5,7 +5,7 @@ import pythonSolver from "../../public/imgs/solver.png";
 
 export default function Python() {
   return (
-    <Layout>
+    <Layout title="Python projects" description="Check out my Python projects!">
       <h1 className={styles.projectsTitle}>My Python Projects</h1>
       <ul className={styles.projectList}>
         <li style={{ marginTop: "5vh", marginBottom: "5vh" }}>

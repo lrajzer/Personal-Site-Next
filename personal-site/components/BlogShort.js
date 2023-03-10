@@ -5,9 +5,9 @@ import styles from "../styles/Blogs.module.css";
 import TagRemover from "../utils/TagRemover";
 import md from "markdown-it";
 
-export default function BlogShort(props) {
-  const maxLength = props.maxLength !== undefined ? props.maxLength : 303;
-  const thisBlog = props.blog;
+export default function BlogShort({ maxLength, blog }) {
+  maxLength = maxLength !== undefined ? maxLength : 303;
+  const thisBlog = blog;
 
   let content = thisBlog.content;
   content = TagRemover(md().render(content));

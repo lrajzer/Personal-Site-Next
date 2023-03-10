@@ -1,0 +1,56 @@
+.content {
+  width: calc(100% - 10vw);
+  padding: 2vh 5vw;
+}
+
+.topBar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2vh;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #fff;
+  height: 5vh;
+}
+
+.topForm {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.formEntry {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.canvas {
+  width: 100%;
+  height: 70vh;
+  border: 1px solid #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    min-height: 84vh;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .content {
+    min-height: 82vh;
+  }
+}
+
+.bottomText {
+  text-align: justify;
+  align-items: center;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+}

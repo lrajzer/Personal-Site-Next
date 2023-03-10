@@ -4,7 +4,13 @@ import Link from "next/link";
 
 export default function Hidden() {
   return (
-    <Layout title="Ooooo spooky hidden" isMonoLang={true}>
+    <Layout
+      title="Ooooo spooky hidden"
+      description={
+        "This is a `hidden` subpage on my website that has my miscellaneous projects "
+      }
+      isMonoLang={true}
+    >
       <div>
         <h1>Welcome to a secret part of my website.</h1>
         <p>
@@ -14,9 +20,16 @@ export default function Hidden() {
       </div>
       <div>
         <ul>
-          <li>
+          {/* <li>
             <div>
               <Link href="/hidden/jam-helper"> Gamejam helper</Link>
+            </div>
+          </li> */}
+          <li>
+            <div>
+              <Link href="/hidden/neural-net-visualizer">
+                Neural net visualizer
+              </Link>
             </div>
           </li>
         </ul>

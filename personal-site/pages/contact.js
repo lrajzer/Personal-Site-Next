@@ -10,7 +10,7 @@ export default function Contact() {
     (e) => {
       e.preventDefault();
       const { email, subject, type, content } = e.target;
-      
+
       if (!executeRecaptcha) {
         return;
       }
@@ -50,7 +50,10 @@ export default function Contact() {
     [executeRecaptcha]
   );
   return (
-    <Layout>
+    <Layout
+      title="Contact me!"
+      description="You can connect with me using my contact form."
+    >
       <form onSubmit={handleSubmit} className={Styles.ContactForm}>
         <div className={Styles.Headers}>
           <div>

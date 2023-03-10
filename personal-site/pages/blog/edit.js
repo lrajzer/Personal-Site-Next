@@ -3,7 +3,6 @@ import CEBlogForm from "../../components/CEBlogForm";
 import Layout from "../../components/Layout";
 import connectDB from "../../components/db/connectDB";
 import BlogPost from "../../components/db/models/BlogPost";
-import { redirect } from "next/dist/server/api-utils";
 
 export default function EditBlog({ user, blog }) {
   return (
@@ -47,6 +46,7 @@ export const getServerSideProps = withPageAuthRequired({
             : null,
           coverImageURL: blog.coverImageURL ? blog.coverImageURL : null, //"https://i.imgur.com/m0SctLi.jpeg"
           coverImageAlt: blog.coverImageAlt ? blog.coverImageAlt : null, //"Swimmy cat"
+          draft: blog.draft ? true : false,
         },
       },
     };
