@@ -418,6 +418,67 @@ const handleCanvasClick = (
   setPoints([...points, new Point(newX, newY, 0)]);
 };
 
+const createNeuronPanel = (net, setNet, neuron) => {
+  console.log(neuron);
+  console.log(net.layers[neuron.layer - 1][neuron.index]);
+  return (
+    <div className={styles.neuronPanel}>
+      <div className={styles.sliderDiv}>
+        <label htmlFor="">Activation</label>
+        <select
+          name="activation"
+          id="neuronActivation"
+          value={neuron.activation}
+          onChange={(e) => {
+            console.log(e.target.value);
+          }}
+        >
+          <option value="linear">Linear</option>
+          <option value="sigmoid">Sigmoid</option>
+          <option value="relu">Relu</option>
+          <option value="tanh">Tanh</option>
+          <option value="leakyRelu">Leaky Relu</option>
+        </select>
+      </div>
+      <div className={styles.sliderDiv}>
+        <label htmlFor="">Bias</label>
+        <input
+          type="range"
+          name="bias"
+          id="neuronBias"
+          max="1"
+          min="-1"
+          step="0.01"
+          placeholder={neuron.bias}
+          onChange={(e) => {
+            console.log(e.target.value);
+          }}
+        />
+      </div>
+      {Object.keys(neuron.weights).map((key) => {
+        console.log(neuron.weights[key]);
+        return (
+          <div key={key} className={styles.sliderDiv}>
+            <label htmlFor="">Weight {key}</label>
+            <input
+              type="range"
+              name="weight"
+              id={`neuronWeight${key}`}
+              max="1"
+              min="-1"
+              step="0.01"
+              placeholder={neuron.weights[key]}
+              onChange={(e) => {
+                console.log(e.target.value);
+              }}
+            />
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 class NeuralNet {
   constructor(neurons) {
     this.biggestLayer = 0; // number of neurons in the biggest layer
@@ -590,25 +651,32 @@ export default function NeuralNetVisualizer() {
             </div>
           </form>
         </div>
-        <canvas
-          ref={canvasRef}
-          className={styles.canvas}
-          width="1"
-          height="1"
-          onClick={(e) =>
-            handleCanvasClick(
-              canvasRef,
-              e,
-              showNet,
-              net,
-              setNet,
-              points,
-              setPoints
-            )
-          }
-        >
-          Your browser does not support the canvas element :((
-        </canvas>
+        <div className={styles.canvasWrapper}>
+          {createNeuronPanel(net, setNet, net.neurons[2])}
+          <canvas
+            ref={canvasRef}
+            className={styles.canvas}
+            width="1"
+            height="1"
+            onClick={(e) =>
+              handleCanvasClick(
+                canvasRef,
+                e,
+                showNet,
+                net,
+                setNet,
+                points,
+                setPoints
+              )
+            }
+            onContextMenu={(e) => {
+              e.preventDefault();
+              console.log("left click");
+            }}
+          >
+            Your browser does not support the canvas element :((
+          </canvas>
+        </div>
         <p className={styles.bottomText}>
           This is a neural net visualizer made entirely in Javascript. It uses
           the HTML5 canvas element to draw the neural net and the points. The
