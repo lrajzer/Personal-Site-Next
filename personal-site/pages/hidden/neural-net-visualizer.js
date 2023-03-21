@@ -7,7 +7,7 @@ import {
   generatePoints,
   createNeuronPanel,
 } from "../../components/hidden/NetClass";
-import { draw } from "../../components/hidden/NetDrawing";
+import { draw, calcBox } from "../../components/hidden/NetDrawing";
 import { useRef, useEffect, useState } from "react";
 
 /**
@@ -29,7 +29,9 @@ const handleCanvasClick = (
   net,
   setNet,
   points,
-  setPoints
+  setPoints,
+  setEditingNet,
+  setNeuronToEdit
 ) => {
   const rect = canvas.current.getBoundingClientRect();
   const x = e.clientX - rect.left;
@@ -38,6 +40,37 @@ const handleCanvasClick = (
   if (showNet) {
     const netBox = calcBox(net);
     if (x < netBox["boxWidth"] && y < netBox["boxHeight"]) {
+      net.neurons.forEach((neuron) => {
+        if (!(neuron.isOutput || neuron.isInput)) {
+          if (
+            Math.abs(
+              x -
+                (netBox["boxWidth"] / 2 -
+                  net.numLayers * 35 +
+                  neuron.layer * 70 -
+                  35)
+            ) < 20 &&
+            Math.abs(
+              y -
+                (netBox["boxHeight"] / 2 -
+                  net.biggestLayer * 25 +
+                  neuron.index * 50 +
+                  25)
+            ) < 20
+          ) {
+            setEditingNet(true);
+            setNeuronToEdit(neuron);
+          }
+        } else if (neuron.isOutput) {
+          if (
+            Math.abs(x - (netBox["boxWidth"] - 50)) < 20 &&
+            Math.abs(y - netBox["boxHeight"] / 2) < 20
+          ) {
+            setEditingNet(true);
+            setNeuronToEdit(neuron);
+          }
+        }
+      });
       return;
     }
   }
@@ -83,12 +116,16 @@ export default function NeuralNetVisualizer() {
       new Neuron(true, false, 1, -1),
     ])
   );
+  const [neuronToEdit, setNeuronToEdit] = useState(null);
   const [points, setPoints] = useState(generatePoints(10, 2, 100, 100));
   const [showNet, setShowNet] = useState(true);
+  const [editingNet, setEditingNet] = useState(false);
+  const [shouldRedraw, setShouldRedraw] = useState(false);
 
   const canvasRef = useRef();
 
   useEffect(() => {
+    console.log("something changed, redrawing call");
     const canvas = canvasRef.current;
     draw(canvas, net, points, showNet);
     window.addEventListener("resize", () => {
@@ -96,6 +133,15 @@ export default function NeuralNetVisualizer() {
       draw(canvas, net, points, showNet);
     });
   }, [showNet, net, points]);
+
+  useEffect(() => {
+    console.log("redrawing call");
+    if (shouldRedraw) {
+      setShouldRedraw(false);
+    }
+    const canvas = canvasRef.current;
+    draw(canvas, net, points, showNet);
+  }, [shouldRedraw]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -108,6 +154,7 @@ export default function NeuralNetVisualizer() {
     >
       <div className={styles.content}>
         <h1>Neural net visualizer</h1>
+        <h1>!!!This is a WIP!!!</h1>
 
         <div className={styles.topBar}>
           <form onSubmit={handleSubmit} className={styles.topForm}>
@@ -172,7 +219,15 @@ export default function NeuralNetVisualizer() {
           </form>
         </div>
         <div className={styles.canvasWrapper}>
-          {createNeuronPanel(net, setNet, net.neurons[2])}
+          {createNeuronPanel(
+            editingNet,
+            net,
+            setNet,
+            neuronToEdit,
+            setEditingNet,
+            setShouldRedraw
+          )}
+
           <canvas
             ref={canvasRef}
             className={styles.canvas}
@@ -186,7 +241,9 @@ export default function NeuralNetVisualizer() {
                 net,
                 setNet,
                 points,
-                setPoints
+                setPoints,
+                setEditingNet,
+                setNeuronToEdit
               )
             }
             onContextMenu={(e) => {
