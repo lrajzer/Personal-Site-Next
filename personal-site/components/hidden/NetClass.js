@@ -1,4 +1,5 @@
 import styles from "../../styles/NeuralNets.module.css";
+import { useState } from "react";
 
 export class NeuralNet {
   constructor(neurons) {
@@ -212,9 +213,101 @@ export const generatePoints = (numPoints, numGroups, height, width) => {
   return points;
 };
 
-export const createNeuronPanel = (net, setNet, neuron) => {
+export const createNeuronPanel = (
+  showThis,
+  net,
+  setNet,
+  neuron,
+  setEditingNet,
+  setShouldRedraw //Shouldn't need this but I guess I have to since setNet doesn't want to redraw the image...
+) => {
+  const [reloadVals, setReload] = useState(true);
+  const [activation, setActivation] = useState(null);
+  const [prevNeuron, setPrevNeuron] = useState(null);
+
+  if (prevNeuron != neuron) {
+    setReload(true);
+    setPrevNeuron(neuron);
+  }
+  if (!showThis && !reloadVals) {
+    setReload(true);
+  }
+  if (!showThis) {
+    return null;
+  }
+  if (showThis && reloadVals) {
+    setActivation(neuron.activation);
+    setReload(false);
+  }
   console.log(neuron);
-  console.log(net.layers[neuron.layer - 1][neuron.index]);
+  if (neuron.isOutput) {
+    return (
+      <div className={styles.neuronPanel}>
+        <div className={styles.sliderDiv}>
+          <label htmlFor="">Activation</label>
+          <select
+            name="activation"
+            id="neuronActivation"
+            value={activation}
+            onChange={(e) => {
+              setActivation(e.target.value);
+            }}
+          >
+            <option value="linear">Linear</option>
+            <option value="sigmoid">Sigmoid</option>
+            <option value="relu">Relu</option>
+            <option value="tanh">Tanh</option>
+            <option value="leakyRelu">Leaky Relu</option>
+          </select>
+        </div>
+        <div className={styles.sliderDiv}>
+          <label htmlFor="">Bias</label>
+          <input
+            type="range"
+            name="bias"
+            id="neuronBias"
+            max="1"
+            min="-1"
+            step="0.01"
+            value={neuron.bias}
+            onChange={(e) => {
+              console.log(e.target.value);
+            }}
+          />
+        </div>
+        {Object.keys(neuron.weights).map((key) => {
+          console.log(neuron.weights[key]);
+          return (
+            <div key={key} className={styles.sliderDiv}>
+              <label htmlFor="">Weight {key}</label>
+              <input
+                type="range"
+                name="weight"
+                id={`neuronWeight${key}`}
+                max="1"
+                min="-1"
+                step="0.01"
+                value={net.output.weights[key]}
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  let newNet = net;
+                  newNet.output.weights[key] = e.target.value;
+                  setNet(newNet);
+                }}
+              />
+            </div>
+          );
+        })}
+        <button
+          className={styles.doneButton}
+          onClick={(e) => setEditingNet(false)}
+        >
+          Done
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.neuronPanel}>
       <div className={styles.sliderDiv}>
@@ -222,9 +315,14 @@ export const createNeuronPanel = (net, setNet, neuron) => {
         <select
           name="activation"
           id="neuronActivation"
-          value={neuron.activation}
+          value={activation}
           onChange={(e) => {
-            console.log(e.target.value);
+            setActivation(e.target.value);
+            let newNet = net;
+            newNet.layers[neuron.layer - 1][neuron.index].activation =
+              e.target.value;
+            setNet(newNet);
+            setShouldRedraw(true);
           }}
         >
           <option value="linear">Linear</option>
@@ -243,9 +341,13 @@ export const createNeuronPanel = (net, setNet, neuron) => {
           max="1"
           min="-1"
           step="0.01"
-          placeholder={neuron.bias}
+          value={neuron.bias}
           onChange={(e) => {
             console.log(e.target.value);
+            let newNet = net;
+            newNet.layers[neuron.layer - 1][neuron.index].bias = e.target.value;
+            setNet(newNet);
+            setShouldRedraw(true);
           }}
         />
       </div>
@@ -261,14 +363,25 @@ export const createNeuronPanel = (net, setNet, neuron) => {
               max="1"
               min="-1"
               step="0.01"
-              placeholder={neuron.weights[key]}
+              value={net.layers[neuron.layer - 1][neuron.index].weights[key]}
               onChange={(e) => {
                 console.log(e.target.value);
+                let newNet = net;
+                newNet.layers[neuron.layer - 1][neuron.index].weights[key] =
+                  e.target.value;
+                setNet(newNet);
+                setShouldRedraw(true);
               }}
             />
           </div>
         );
       })}
+      <button
+        className={styles.doneButton}
+        onClick={(e) => setEditingNet(false)}
+      >
+        Done
+      </button>
     </div>
   );
 };
