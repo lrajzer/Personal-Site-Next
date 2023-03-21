@@ -60,7 +60,7 @@ const drawAxis = (canvas) => {
   ctx.stroke();
 };
 
-const calcBox = (net) => {
+export const calcBox = (net) => {
   let boxWidth = 400;
   let boxHeight = 150;
 
@@ -205,11 +205,11 @@ export const draw = (canvas, net, points, showNet) => {
   ctx.fillRect(0, 0, width, height);
   ctx.strokeStyle = "white";
   ctx.lineWidth = 2;
-  drawNetInfluence(canvas, net, 1);
+  drawNetInfluence(canvas, net, 2);
   // console.log(points);
-  drawPoints(canvas, points);
   drawAxis(canvas);
   // console.log(showNet);
+  drawPoints(canvas, points);
   if (showNet) {
     drawNet(canvas, net);
   }
