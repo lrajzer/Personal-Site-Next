@@ -31,7 +31,7 @@ export default function Layout({
     kontakt: "/contact",
     projekty: "/projects",
   };
-  // console.log(asPath);
+  console.log("otherLang: ", otherLang);
   return (
     <>
       <Head>
@@ -102,19 +102,9 @@ export default function Layout({
           </h6>
           <span>
             {pl ? (
-              <Link
-                href={
-                  altPlPaths[
-                    asPath.split("/")[2] ? asPath.split("/")[2] : "undefined"
-                  ]
-                }
-              >
-                Kliknij tu aby zmienić język
-              </Link>
+              <Link href={otherLang}>Kliknij tu aby zmienić język</Link>
             ) : (
-              <Link href={altEngPaths[asPath.split("/")[1]]}>
-                Click here to change the language
-              </Link>
+              <Link href={otherLang}>Click here to change the language</Link>
             )}
           </span>
         </div>
