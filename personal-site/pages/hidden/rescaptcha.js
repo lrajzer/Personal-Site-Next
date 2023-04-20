@@ -38,8 +38,6 @@ const ResCaptchaElem = ({ imgs, uid }) => {
     if (correct === null) return;
     if (correct) {
       alert("Correct!");
-    } else {
-      alert("Incorrect!");
     }
   }, [correct]);
   return (
