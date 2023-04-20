@@ -32,6 +32,14 @@ export default async function verifyRescaptcha(req, res) {
     .split(",")
     .map((x) => x.replace(/ /g, ""))
     .map((x) => x.toUpperCase());
+
+  console.log(guesses.length);
+
+  if (guesses.length !== dbData.testImgs.length + dbData.trainImgs.length) {
+    res.status(400).json({ error: "Please enter a guess for each image..." });
+    return 0;
+  }
+
   let correct = 0;
 
   for (let i = 0; i < dbData.testPlates.length; i++) {
