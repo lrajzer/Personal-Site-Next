@@ -8,26 +8,32 @@ import ResCaptchaData from "../../../../components/db/models/ResCaptchaData.js";
 
 import { withApiAuthRequired, getSession } from "@auth0/nextjs-auth0";
 export default withApiAuthRequired(async function addPlate(req, res) {
-  const { url, value } = req.body;
+  const { piu, isTrain, piuData } = req.body;
+  console.log(piu, isTrain, piuData);
   const { user } = getSession(req, res);
-  // console.log(user);
   if (user.sub !== process.env.ADMINSUB) {
     res.status(401).redirect("/");
     return 0;
   }
   await connectDB();
   let newPlate;
-  if (value === null) {
+
+  if ((await ResCaptchaData.findOne({ url: piu })) !== null) {
+    res.status(400).json({ error: "Plate already exists" });
+    return 0;
+  }
+
+  if (isTrain === false) {
     newPlate = await ResCaptchaData.create({
-      url: url,
+      url: piu,
       isSolved: false,
       content: "",
     });
   } else {
     newPlate = await ResCaptchaData.create({
-      url: url,
+      url: piu,
       isSolved: true,
-      content: value,
+      content: piuData.replace(/ /g, "").toUpperCase(),
     });
   }
   if (newPlate === null) {
