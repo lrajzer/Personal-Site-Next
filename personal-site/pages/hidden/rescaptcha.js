@@ -4,6 +4,7 @@ import Layout from "../../components/Layout";
 import Image from "next/image";
 import connectDB from "../../components/db/connectDB";
 import ResCaptcha from "../../components/db/models/ResCaptcha";
+import ResCaptchaData from "../../components/db/models/ResCaptchaData";
 import Link from "next/link";
 
 export default function ResCaptchaPage({ imgs, uid }) {
@@ -134,18 +135,34 @@ export const getServerSideProps = async (context) => {
       Math.random().toString(36).substring(2, 15); // copilot whispered this and it works I guess?
   } while ((await ResCaptcha.findOne({ uid: uid })) !== null);
 
+  let testPlates = await ResCaptchaData.aggregate([
+    { $match: { isSolved: true } },
+    { $sample: { size: 3 } },
+  ]);
+
+  let trainPlates = await ResCaptchaData.aggregate([
+    { $match: { isSolved: false } },
+    { $sample: { size: 3 } },
+  ]);
+
+  let testUrls = [];
+  let testVals = [];
+  let trainUrls = [];
+
+  testPlates.map((plate) => {
+    testUrls.push(plate.url);
+    testVals.push(plate.content);
+  });
+  trainPlates.map((plate) => {
+    trainUrls.push(plate.url);
+  });
+
+  console.log(testUrls, testVals, trainUrls);
+
   const imgsServerside = {
-    testVals: ["SC005AV", "WP2263R", "CBY8439L"],
-    tests: [
-      "https://img03.platesmania.com/230418/o/21342437.jpg",
-      "https://img03.platesmania.com/230418/o/21342355.jpg",
-      "https://img03.platesmania.com/230419/o/21342997.jpg",
-    ],
-    train: [
-      "https://img03.platesmania.com/230418/o/21342389.jpg",
-      "https://img03.platesmania.com/230418/o/21341891.jpg",
-      "https://img03.platesmania.com/230419/o/21343008.jpg",
-    ],
+    testVals: testVals,
+    tests: testUrls,
+    train: trainUrls,
   }; // TODO: for now this is hardcoded, change it so it generates some data on the fly...
 
   const data = {
