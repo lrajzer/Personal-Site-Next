@@ -221,9 +221,9 @@ export const createNeuronPanel = (
   setEditingNet,
   setShouldRedraw //Shouldn't need this but I guess I have to since setNet doesn't want to redraw the image...
 ) => {
-  const [reloadVals, setReload] = useState(true);
-  const [activation, setActivation] = useState(null);
-  const [prevNeuron, setPrevNeuron] = useState(null);
+  // const [reloadVals, setReload] = useState(true);
+  // const [activation, setActivation] = useState(null);
+  // const [prevNeuron, setPrevNeuron] = useState(null);
 
   if (prevNeuron != neuron) {
     setReload(true);
