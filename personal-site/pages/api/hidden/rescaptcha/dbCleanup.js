@@ -25,9 +25,9 @@ export default async function handler(req, res) {
           //   console.log("added");
         }
       }
-      //   await doc.delete();
+      await doc.delete();
     } else if (Date.now() - doc.dateCreated > 3 * 60 * 1000) {
-      //   await doc.delete();
+      await doc.delete();
     }
   }
 
