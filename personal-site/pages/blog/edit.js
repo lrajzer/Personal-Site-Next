@@ -1,4 +1,4 @@
-import { withPageAuthRequired } from "@auth0/nextjs-auth0";
+import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import CEBlogForm from "../../components/CEBlogForm";
 import Layout from "../../components/Layout";
 import connectDB from "../../components/db/connectDB";
@@ -14,6 +14,15 @@ export default function EditBlog({ user, blog }) {
 
 export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps({ query }) {
+    const { user } = getSession(req, res);
+    if (user?.sub !== process.env.ADMINSUB) {
+      res.writeHead(302, {
+        Location: "/blog",
+      });
+      res.end();
+      return { props: {} };
+    }
+
     const uid = query.uid;
     if (!uid) {
       return {
