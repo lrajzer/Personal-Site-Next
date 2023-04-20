@@ -13,6 +13,7 @@ export default function Layout({
   children,
   isMonoLang,
   otherLang,
+  style,
 }) {
   const { asPath } = useRouter();
   // console.log(asPath.split("/"));
@@ -149,7 +150,9 @@ export default function Layout({
 
       <main>
         <Navbar inBrackets={inBrackets} pl={pl} />
-        <div className={styles.content}>{children}</div>
+        <div className={styles.content} style={style}>
+          {children}
+        </div>
         <Footer pl={pl} />
       </main>
     </>
