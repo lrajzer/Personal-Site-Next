@@ -1,0 +1,9 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "next build",
+  "public": true,
+  "trailingSlash": false,
+  "crons": [
+    { "path": "/api/hidden/rescaptcha/dbCleanup", "schedule": "0 0 * * *" }
+  ]
+}
