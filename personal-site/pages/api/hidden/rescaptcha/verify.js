@@ -23,6 +23,7 @@ export default async function verifyRescaptcha(req, res) {
     return 0;
   }
   if (Date.now() - dbData.dateCreated > 60 * 1000) {
+    dbData.delete();
     res.status(400).json({ error: "Expired" });
     return 0;
   }
@@ -41,12 +42,10 @@ export default async function verifyRescaptcha(req, res) {
       res.status(200).json({ correct: false });
       return 0;
     }
+    correct++;
   }
 
-  let trainvals = [];
-  for (let i = 0; i < dbData.trainImgs.length; i++) {
-    trainvals = guesses[correct + i];
-  }
+  let trainvals = guesses.slice(correct, guesses.length);
   dbData.trainPlates = trainvals;
   dbData["solved"] = true;
   let response = await ResCaptcha.where({ uid: uid }).updateOne(dbData);
