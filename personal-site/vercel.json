@@ -2,7 +2,6 @@
   "framework": "nextjs",
   "buildCommand": "next build",
   "public": true,
-  "region": ["fra1"],
   "trailingSlash": false,
   "crons": [
     { "path": "/api/hidden/rescaptcha/dbCleanup", "schedule": "0 0 * * *" }
