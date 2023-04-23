@@ -13,7 +13,7 @@ export default function EditBlog({ user, blog }) {
 }
 
 export const getServerSideProps = withPageAuthRequired({
-  async getServerSideProps({ query }) {
+  async getServerSideProps({ query, req, res }) {
     const { user } = getSession(req, res);
     if (user?.sub !== process.env.ADMINSUB) {
       res.writeHead(302, {
