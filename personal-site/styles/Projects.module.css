@@ -3,6 +3,7 @@
 }
 
 .projectsTable {
+  width: calc(100% - 4vw);
   padding-left: 2vw;
   padding-right: 2vw;
   padding-top: 1vh;
@@ -14,7 +15,7 @@
 }
 
 .row {
-  display: table-row;
+  display: table-row; 
 }
 
 .projectsTitle {
@@ -37,7 +38,8 @@
 }
 
 .project {
-  width: 30%;
+  width: 50%;
+  position: relative;
   text-align: center;
   display: table-cell;
 }
