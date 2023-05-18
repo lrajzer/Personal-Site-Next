@@ -26,14 +26,24 @@ export const ResCaptchaElem = ({ imgs, uid }) => {
           {tests.map((img, i) => {
             return (
               <div key={i} className={styles.singImg}>
-                <Image src={img} fill={true} style={{ objectFit: "contain" }} />
+                <Image
+                  src={img}
+                  fill={true}
+                  style={{ objectFit: "contain" }}
+                  alt="Rescaptcha image"
+                />
               </div>
             );
           })}
           {train.map((img, i) => {
             return (
               <div key={i} className={styles.singImg}>
-                <Image src={img} fill={true} style={{ objectFit: "contain" }} />
+                <Image
+                  src={img}
+                  fill={true}
+                  style={{ objectFit: "contain" }}
+                  alt="Rescaptcha image"
+                />
               </div>
             );
           })}

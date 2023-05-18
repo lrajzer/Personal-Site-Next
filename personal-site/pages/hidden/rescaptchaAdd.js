@@ -93,7 +93,13 @@ export default withPageAuthRequired(function CreatePlate() {
           </button>
         </form>
         <div style={{ height: "50vh" }}>
-          {image && <img style={{ height: "50vh" }} src={image} />}
+          {image && (
+            <img
+              style={{ height: "50vh" }}
+              src={image}
+              alt="Preview of the image You're about to add"
+            />
+          )}
         </div>
       </div>
     </Layout>
