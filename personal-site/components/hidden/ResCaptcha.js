@@ -30,11 +30,8 @@ export const ResCaptchaElem = ({ imgs, uid }) => {
                   src={img}
                   fill={true}
                   alt="Rescaptcha image"
-                  style={{
-                    objectFit: "contain",
-                    maxWidth: "100%",
-                    height: "auto"
-                  }} />
+                  style={{ objectFit: "contain" }}
+                />
               </div>
             );
           })}
@@ -45,11 +42,8 @@ export const ResCaptchaElem = ({ imgs, uid }) => {
                   src={img}
                   fill={true}
                   alt="Rescaptcha image"
-                  style={{
-                    objectFit: "contain",
-                    maxWidth: "100%",
-                    height: "auto"
-                  }} />
+                  style={{ objectFit: "contain" }}
+                />
               </div>
             );
           })}
