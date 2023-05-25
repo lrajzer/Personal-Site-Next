@@ -39,7 +39,15 @@ export default function Layout({
         <title>{title ? title : "Michal Rajzer"}</title>
         <meta property="og:title" content={title ? title : "Michal Rajzer"} />
         <meta
-          name="description"
+          property="description"
+          content={
+            description
+              ? description
+              : "Michal Rajzer's site, created using NextJs and MongoDB"
+          }
+        />
+        <meta
+          property="og:description"
           content={
             description
               ? description
@@ -48,14 +56,13 @@ export default function Layout({
           key="desc"
         />
         <meta
-          name="og:description"
+          property="twitter:description"
           content={
             description
               ? description
               : "Michal Rajzer's site, created using NextJs and MongoDB"
           }
-          key="desc"
-        />
+        ></meta>
         <meta property="og:locale" content={pl ? "pl_PL" : "en_GB"} />
         {isMonoLang ? (
           ""
@@ -88,6 +95,13 @@ export default function Layout({
           sizes="16x16"
           href="/favicon-16x16.png"
         />
+
+        <meta property="twitter:card" content="summary" />
+        <meta
+          property="twitter:title"
+          content={title ? title : "Michal Rajzer"}
+        ></meta>
+
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
       {isMonoLang ? (
