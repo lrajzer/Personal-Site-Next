@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles/ResCaptcha.module.css";
 
@@ -29,9 +29,12 @@ export const ResCaptchaElem = ({ imgs, uid }) => {
                 <Image
                   src={img}
                   fill={true}
-                  style={{ objectFit: "contain" }}
                   alt="Rescaptcha image"
-                />
+                  style={{
+                    objectFit: "contain",
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
               </div>
             );
           })}
@@ -41,9 +44,12 @@ export const ResCaptchaElem = ({ imgs, uid }) => {
                 <Image
                   src={img}
                   fill={true}
-                  style={{ objectFit: "contain" }}
                   alt="Rescaptcha image"
-                />
+                  style={{
+                    objectFit: "contain",
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
               </div>
             );
           })}

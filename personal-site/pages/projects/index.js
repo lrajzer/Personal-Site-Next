@@ -1,7 +1,7 @@
 import Layout from "../../components/Layout";
 import styles from "../../styles/Projects.module.css";
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import pythonSolver from "../../public/imgs/solver.png";
 import { ResCaptchaElem } from "../../components/hidden/ResCaptcha";
 import connectDB from "../../components/db/connectDB";
@@ -42,9 +42,8 @@ export default function Projects({ imgs, uid }) {
                   <Image
                     src={pythonSolver}
                     alt="Image of a sudoku solver in Python."
-                    layout="fill"
-                    style={{ width: "100%", height: "unset" }}
-                  />
+                    fill
+                    sizes="100vw" />
                 </div>
               </a>
             </div>

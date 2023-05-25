@@ -1,7 +1,7 @@
 import styles from "../../styles/ResCaptcha.module.css";
 import { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import connectDB from "../../components/db/connectDB";
 import ResCaptcha from "../../components/db/models/ResCaptcha";
 import ResCaptchaData from "../../components/db/models/ResCaptchaData";

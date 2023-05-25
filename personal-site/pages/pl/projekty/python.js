@@ -1,6 +1,6 @@
 import Layout from "../../../components/Layout";
 import pythonSolver from "../../../public/imgs/solver.png";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import styles from "../../../styles/Projects.module.css";
 
 export default function Python() {
@@ -15,9 +15,8 @@ export default function Python() {
               <Image
                 src={pythonSolver}
                 alt="Image of a sudoku solver in Python."
-                layout="fill"
-                style={{ width: "100%", height: "unset" }}
-              />
+                fill
+                sizes="100vw" />
             </div>
             <p
               className={styles.projectDescription}

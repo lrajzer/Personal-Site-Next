@@ -1,5 +1,5 @@
 import Layout from "../../../components/Layout";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import styles from "../../../styles/Projects.module.css";
 
 export default function Javascript() {
