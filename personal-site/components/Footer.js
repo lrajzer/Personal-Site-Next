@@ -5,9 +5,6 @@ export default function Footer({ pl }) {
   return (
     <footer className={styles.footer}>
       <div className={styles.links}>
-        {/* <Link href="">
-          <a className={styles.link}>Resume</a>
-        </Link> */}
         <a
           className={styles.link}
           href={
@@ -31,7 +28,7 @@ export default function Footer({ pl }) {
           {pl ? "O mnie" : "About me"}
         </Link>
         <Link
-          href={pl ? "/kontakt" : "/contact"}
+          href={pl ? "/pl/kontakt" : "/contact"}
           className={`${styles.link} ${styles.noMobile}`}
         >
           {pl ? "Kontakt" : "Contact"}
@@ -40,7 +37,7 @@ export default function Footer({ pl }) {
           Blog
         </Link>
         <Link
-          href={pl ? "/projekty" : "/projects"}
+          href={pl ? "/pl/projekty" : "/projects"}
           className={`${styles.link} ${styles.noMobile}`}
         >
           {pl ? "Projekty" : "Projects"}
