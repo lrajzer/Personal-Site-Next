@@ -1,6 +1,6 @@
 import Layout from "../../../components/Layout";
 import pythonSolver from "../../../public/imgs/solver.png";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import styles from "../../../styles/Projects.module.css";
 
 export default function Python() {

@@ -1,7 +1,7 @@
 import Layout from "../../components/Layout";
 import styles from "../../styles/Projects.module.css";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import pythonSolver from "../../public/imgs/solver.png";
 import { ResCaptchaElem } from "../../components/hidden/ResCaptcha";
 import connectDB from "../../components/db/connectDB";
