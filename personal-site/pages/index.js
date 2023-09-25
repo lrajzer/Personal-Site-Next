@@ -10,14 +10,13 @@ export default function Home() {
   const isVisible = useOnScreen(ref);
   return (
     <Layout
-      title="About Michal Rajzer"
+      title="About Rajzer"
       description="Welcome to my personal site, I'm a fullstack developer constantly looking for interesting projects"
     >
       <div className={styles.contentBlockOne}>
         <div className={styles.nameHeader}>
           <div style={{ padding: 0, margin: 0 }}>
             <h1>Hey!</h1>
-            <h1>My name is Michał,</h1>
             <h1>I&apos;m a fullstack developer!</h1>
           </div>
         </div>

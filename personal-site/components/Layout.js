@@ -36,14 +36,14 @@ export default function Layout({
   return (
     <>
       <Head>
-        <title>{title ? title : "Michal Rajzer"}</title>
-        <meta property="og:title" content={title ? title : "Michal Rajzer"} />
+        <title>{title ? title : "Rajzer"}</title>
+        <meta property="og:title" content={title ? title : "Rajzer"} />
         <meta
           property="description"
           content={
             description
               ? description
-              : "Michal Rajzer's site, created using NextJs and MongoDB"
+              : "Rajzer's site, created using NextJs and MongoDB"
           }
         />
         <meta
@@ -51,7 +51,7 @@ export default function Layout({
           content={
             description
               ? description
-              : "Michal Rajzer's site, created using NextJs and MongoDB"
+              : "Rajzer's site, created using NextJs and MongoDB"
           }
           key="desc"
         />
@@ -60,7 +60,7 @@ export default function Layout({
           content={
             description
               ? description
-              : "Michal Rajzer's site, created using NextJs and MongoDB"
+              : "Rajzer's site, created using NextJs and MongoDB"
           }
         ></meta>
         <meta property="og:locale" content={pl ? "pl_PL" : "en_GB"} />
@@ -73,11 +73,8 @@ export default function Layout({
           />
         )}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://michalrajzer.com" />
-        <meta
-          property="og:site_name"
-          content="Michal Rajzer's personal website"
-        />
+        <meta property="og:url" content="https://rajzer.dev" />
+        <meta property="og:site_name" content="Rajzer's personal website" />
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -99,7 +96,7 @@ export default function Layout({
         <meta property="twitter:card" content="summary" />
         <meta
           property="twitter:title"
-          content={title ? title : "Michal Rajzer"}
+          content={title ? title : "Rajzer"}
         ></meta>
 
         <link rel="manifest" href="/site.webmanifest" />

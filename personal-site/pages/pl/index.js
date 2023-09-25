@@ -9,12 +9,11 @@ export default function Home() {
   const ref = useRef();
   const isVisible = useOnScreen(ref);
   return (
-    <Layout title="O mnie | Michal Rajzer" pl={true}>
+    <Layout title="O mnie | Rajzer" pl={true}>
       <div className={styles.contentBlockOne}>
         <div className={styles.nameHeader}>
           <div style={{ padding: 0, margin: 0 }}>
             <h1>Hej!</h1>
-            <h1>Jestem Michał,</h1>
             <h1>Jestem developerem fullstack!</h1>
           </div>
         </div>

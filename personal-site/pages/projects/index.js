@@ -43,7 +43,8 @@ export default function Projects({ imgs, uid }) {
                     src={pythonSolver}
                     alt="Image of a sudoku solver in Python."
                     fill
-                    sizes="100vw" />
+                    sizes="100vw"
+                  />
                 </div>
               </a>
             </div>

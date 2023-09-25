@@ -45,7 +45,7 @@ export default function BlogShort({ maxLength, blog }) {
           </div>
           <div className={styles.Meta}>
             <p className={styles.Author}>
-              <Link href="/">Michał Rajzer</Link>
+              <Link href="/">Rajzer</Link>
             </p>
             {
               <time dateTime={date.toISOString()} className={styles.Date}>

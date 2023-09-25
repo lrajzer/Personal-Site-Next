@@ -21,6 +21,7 @@ const initialValues = {
 };
 
 const reducer = (state, action) => {
+  console.log(action);
   switch (action.type) {
     case "type":
       switch (action.payload) {
@@ -66,6 +67,7 @@ const reducer = (state, action) => {
     case "o":
       return { ...state, o: action.payload };
     case "reset":
+      console.log("reset");
       return {
         ...state,
         L: null, // Inductance
@@ -252,12 +254,7 @@ export default function Filters() {
           <button
             type="button"
             onClick={
-              console.log("clicked2!") ||
-              values.C ||
-              values.R ||
-              values.L ||
-              values.f1 ||
-              values.f2
+              values.C || values.R || values.L || values.f1 || values.f2
                 ? setValues({ type: "reset", payload: "" })
                 : null
             }

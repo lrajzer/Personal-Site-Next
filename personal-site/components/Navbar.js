@@ -18,7 +18,7 @@ export default function Navbar(props) {
     <div className={styles.navigation}>
       <nav className={styles.navbar}>
         <Link href={asPath} className={styles.navLink}>
-          Michał.Rajzer({inBrackets})
+          Rajzer({inBrackets})
         </Link>
         <Link href={props.pl ? "/pl" : "/"} className={styles.navLink}>
           {props.pl ? "O mnie" : "About me"}

@@ -22,7 +22,7 @@ export default function BlogLong({ blog }) {
         <div>
           <p>
             {blog.lang == "en" ? "By: " : "Przez: "}
-            <Link href="/">Michał Rajzer</Link>
+            <Link href="/">Rajzer</Link>
           </p>
           <p>
             {blog.lang == "en" ? "Created at: " : "Utworzone: "}
